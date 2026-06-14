@@ -1,10 +1,18 @@
 import { Router } from "express";
+import { Pool } from "pg";
 import { logger } from "../lib/logger";
 
 const router = Router();
 
-const INSFORGE_URL = process.env["INSFORGE_URL"];
-const INSFORGE_SERVICE_KEY = process.env["INSFORGE_SERVICE_KEY"];
+let pool: Pool | null = null;
+
+function getPool(): Pool | null {
+  if (!process.env["DATABASE_URL"]) return null;
+  if (!pool) {
+    pool = new Pool({ connectionString: process.env["DATABASE_URL"], ssl: { rejectUnauthorized: false } });
+  }
+  return pool;
+}
 
 router.post("/registrations", async (req, res) => {
   const { firstName, lastName, email, phone, ticketPreference, organization, consent } = req.body;
@@ -14,44 +22,26 @@ router.post("/registrations", async (req, res) => {
     return;
   }
 
-  if (!INSFORGE_URL || !INSFORGE_SERVICE_KEY) {
-    logger.warn("InsForge credentials not configured — registration not persisted");
-    res.status(200).json({ success: true, message: "Registration received (backend not yet configured)" });
+  const db = getPool();
+
+  if (!db) {
+    logger.warn("DATABASE_URL not configured — registration not persisted");
+    res.status(200).json({ success: true, message: "Registration received" });
     return;
   }
 
   try {
-    const response = await fetch(`${INSFORGE_URL}/rest/v1/registrations`, {
-      method: "POST",
-      headers: {
-        "apikey": INSFORGE_SERVICE_KEY,
-        "Authorization": `Bearer ${INSFORGE_SERVICE_KEY}`,
-        "Content-Type": "application/json",
-        "Prefer": "return=minimal",
-      },
-      body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        email,
-        phone,
-        ticket_preference: ticketPreference,
-        organization: organization || null,
-        consent,
-      }),
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      logger.error({ status: response.status, body: errorText }, "InsForge insert failed");
-      res.status(500).json({ error: "Failed to save registration" });
-      return;
-    }
+    await db.query(
+      `INSERT INTO registrations (first_name, last_name, email, phone, ticket_preference, organization, consent)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+      [firstName, lastName, email, phone, ticketPreference, organization || null, consent]
+    );
 
     logger.info({ email, ticketPreference }, "Registration saved");
     res.status(201).json({ success: true, message: "Registration saved successfully" });
   } catch (err) {
     logger.error({ err }, "Error saving registration");
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Failed to save registration" });
   }
 });
 
