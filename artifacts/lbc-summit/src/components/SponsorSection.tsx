@@ -23,6 +23,8 @@ export default function SponsorSection() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const set = (field: string) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -31,16 +33,34 @@ export default function SponsorSection() {
     setErrors((p) => ({ ...p, [field]: "" }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs: Record<string, string> = {};
     if (!form.name.trim()) errs.name = "Name is required.";
     if (!form.organization.trim()) errs.organization = "Organization is required.";
-    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
+    if (!form.email.trim() || !/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(form.email))
       errs.email = "Valid email required.";
     if (!form.interest) errs.interest = "Please select a partnership type.";
     if (Object.keys(errs).length > 0) { setErrors(errs); return; }
-    setSubmitted(true);
+
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/sponsor-inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error((data as { error?: string }).error || "Submission failed. Please try again.");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -134,8 +154,13 @@ export default function SponsorSection() {
                 <label htmlFor="sp-message" className="block text-sm font-semibold text-gray-700 mb-1">Message <span className="text-gray-400 font-normal">(optional)</span></label>
                 <textarea id="sp-message" value={form.message} onChange={set("message")} rows={3} className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#1a56db] resize-none" data-testid="textarea-sponsor-message" placeholder="Tell us more about your organization or interest..." />
               </div>
-              <button type="submit" className="w-full bg-[#1a56db] hover:bg-[#1e3a8a] text-white font-bold py-3.5 rounded-xl transition-colors" data-testid="button-sponsor-submit" style={{ fontFamily: "var(--app-font-heading)" }}>
-                Submit Partnership Inquiry
+              {submitError && (
+                <p className="text-red-500 text-sm text-center bg-red-50 border border-red-200 rounded-lg py-2 px-3">
+                  {submitError}
+                </p>
+              )}
+              <button type="submit" disabled={submitting} className="w-full bg-[#1a56db] hover:bg-[#1e3a8a] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl transition-colors" data-testid="button-sponsor-submit" style={{ fontFamily: "var(--app-font-heading)" }}>
+                {submitting ? "Submitting..." : "Submit Partnership Inquiry"}
               </button>
             </form>
           )}

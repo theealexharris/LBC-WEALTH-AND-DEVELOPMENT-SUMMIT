@@ -28,7 +28,14 @@ app.use(
     },
   }),
 );
-app.use(cors());
+const allowedOrigin = process.env["FRONTEND_URL"] ?? "https://lbc-wealth-and-development-summit.onrender.com";
+app.use(
+  cors({
+    origin: process.env["NODE_ENV"] === "production" ? allowedOrigin : true,
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

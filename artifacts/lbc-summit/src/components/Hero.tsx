@@ -37,12 +37,12 @@ export default function Hero({ onOpenModal }: HeroProps) {
           <img
             src={summitLogo}
             alt="LBC Wealth and Development Summit 2026"
-            className="h-32 w-32 sm:h-44 sm:w-44 md:h-52 md:w-52 object-contain drop-shadow-2xl"
+            className="h-36 w-36 sm:h-48 sm:w-48 md:h-56 md:w-56 object-contain drop-shadow-2xl"
           />
         </div>
 
         {/* Event Info Badge */}
-        <div className="flex flex-col items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 sm:px-8 py-4 mb-6 w-full max-w-xl mx-auto">
+        <div className="flex flex-col items-center gap-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-4 sm:px-8 py-3 mb-6 w-full max-w-xl mx-auto">
 
           {/* Title row */}
           <div className="flex items-center gap-2 flex-wrap justify-center">
@@ -55,12 +55,12 @@ export default function Hero({ onOpenModal }: HeroProps) {
           <div className="w-full border-t border-white/15" />
 
           {/* Venue */}
-          <div className="flex flex-col items-center gap-0.5 text-center">
+          <div className="flex flex-col items-center gap-0 text-center">
             <a
               href="https://www.hotelcurrent.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#c79d35] font-bold text-base sm:text-lg hover:text-[#e0b84a] transition-colors hover:underline underline-offset-2 leading-tight"
+              className="text-[#c79d35] font-bold text-base sm:text-lg hover:text-[#e0b84a] transition-colors hover:underline underline-offset-2 leading-snug"
               style={{ fontFamily: "var(--app-font-heading)" }}
             >
               Hotel Current
@@ -77,7 +77,7 @@ export default function Hero({ onOpenModal }: HeroProps) {
             <div className="flex-1 flex flex-col items-center">
               <span className="text-[#c79d35] text-xs font-bold uppercase tracking-widest">Day 1</span>
               <span className="text-gray-200 text-xs sm:text-sm font-semibold">
-                Aug 15, 2026 @ 10am–4pm <span className="text-gray-400 font-normal">| VIP: 4pm–5pm</span>
+                Aug 15, 2026 @ 10am–4pm <span className="text-gray-400 font-normal">| VIP 4pm–5pm</span>
               </span>
             </div>
             <div className="hidden sm:block w-px bg-white/20 self-stretch" />
@@ -85,7 +85,7 @@ export default function Hero({ onOpenModal }: HeroProps) {
             <div className="flex-1 flex flex-col items-center">
               <span className="text-[#c79d35] text-xs font-bold uppercase tracking-widest">Day 2</span>
               <span className="text-gray-200 text-xs sm:text-sm font-semibold">
-                Aug 16, 2026 @ 1pm–5pm <span className="text-gray-400 font-normal">| VIP: 5pm–6pm</span>
+                Aug 16, 2026 @ 1pm–5pm <span className="text-gray-400 font-normal">| VIP 5pm–6pm</span>
               </span>
             </div>
           </div>
