@@ -35,11 +35,11 @@ export default function Hero({ onOpenModal }: HeroProps) {
           <img
             src={summitLogo}
             alt="LBC Wealth and Development Summit 2026"
-            className="h-36 w-36 sm:h-44 sm:w-44 object-contain drop-shadow-2xl"
+            className="h-44 w-44 sm:h-52 sm:w-52 object-contain drop-shadow-2xl"
           />
         </div>
 
-        <div className="inline-flex flex-col items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-10 py-4 mb-6 max-w-2xl w-full">
+        <div className="inline-flex flex-col items-center gap-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-10 py-4 mb-6 max-w-2xl w-full">
           <div className="flex items-center gap-3">
             <span className="w-3 h-3 rounded-full bg-[#c79d35] animate-pulse flex-shrink-0" />
             <span className="text-white text-lg sm:text-xl font-semibold tracking-wide whitespace-nowrap" style={{ fontFamily: "var(--app-font-heading)" }}>
@@ -47,28 +47,28 @@ export default function Hero({ onOpenModal }: HeroProps) {
             </span>
           </div>
           <div className="w-full border-t border-white/15" />
-          <div className="flex flex-col items-center gap-0.5 text-center">
+          <div className="flex flex-col items-center gap-0 text-center">
             <a
               href="https://www.hotelcurrent.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#c79d35] font-bold text-sm hover:text-[#e0b84a] transition-colors hover:underline underline-offset-2"
+              className="text-[#c79d35] font-bold text-lg sm:text-xl hover:text-[#e0b84a] transition-colors hover:underline underline-offset-2 leading-tight"
               style={{ fontFamily: "var(--app-font-heading)" }}
             >
               Hotel Current
             </a>
-            <span className="text-gray-300 text-sm">5325 CA-1, Long Beach, CA 90804 &nbsp;·&nbsp; Ph: (562) 597-1341</span>
+            <span className="text-gray-300 text-sm leading-snug">5325 CA-1, Long Beach, CA 90804 &nbsp;·&nbsp; Ph: (562) 597-1341</span>
           </div>
           <div className="w-full border-t border-white/15" />
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-8 text-center">
-            <div className="flex flex-col items-center">
-              <span className="text-[#c79d35] text-sm font-bold uppercase tracking-widest">Day 1</span>
-              <span className="text-gray-200 text-sm font-semibold">August 15, 2026 &nbsp;@&nbsp; 10am – 4pm &nbsp;·&nbsp; VIP: 4pm – 5pm</span>
+          <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-8 text-center">
+            <div className="flex flex-col items-center gap-0">
+              <span className="text-[#c79d35] text-sm font-bold uppercase tracking-widest leading-tight">Day 1</span>
+              <span className="text-gray-200 text-sm font-semibold leading-snug">August 15, 2026 &nbsp;@&nbsp; 10am – 4pm &nbsp;<span className="text-gray-400 font-normal">| VIP: 4pm – 5pm</span></span>
             </div>
             <div className="hidden sm:block w-px bg-white/20" />
-            <div className="flex flex-col items-center">
-              <span className="text-[#c79d35] text-sm font-bold uppercase tracking-widest">Day 2</span>
-              <span className="text-gray-200 text-sm font-semibold">August 16, 2026 &nbsp;@&nbsp; 1pm – 5pm &nbsp;·&nbsp; VIP: 5pm – 6pm</span>
+            <div className="flex flex-col items-center gap-0">
+              <span className="text-[#c79d35] text-sm font-bold uppercase tracking-widest leading-tight">Day 2</span>
+              <span className="text-gray-200 text-sm font-semibold leading-snug">August 16, 2026 &nbsp;@&nbsp; 1pm – 5pm &nbsp;<span className="text-gray-400 font-normal">| VIP: 5pm – 6pm</span></span>
             </div>
           </div>
         </div>
