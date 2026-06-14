@@ -15,7 +15,7 @@ COPY lib/api-client-react/package.json ./lib/api-client-react/
 COPY lib/api-spec/package.json ./lib/api-spec/
 COPY scripts/package.json ./scripts/
 
-RUN pnpm install --frozen-lockfile
+RUN pnpm install --no-frozen-lockfile
 
 # Copy the rest of the source
 COPY . .
