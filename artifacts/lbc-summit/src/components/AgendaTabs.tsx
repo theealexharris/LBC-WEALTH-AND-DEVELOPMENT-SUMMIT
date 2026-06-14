@@ -44,9 +44,9 @@ function AgendaRow({ item }: { item: AgendaItem }) {
 
   return (
     <div
-      className={`flex gap-4 items-start py-4 border-b border-gray-100 last:border-0 border-l-4 pl-4 ${config.border} ${isVip ? "bg-amber-50/50" : ""}`}
+      className={`flex flex-col sm:flex-row gap-2 sm:gap-4 items-start py-4 border-b border-gray-100 last:border-0 border-l-4 pl-4 ${config.border} ${isVip ? "bg-amber-50/50" : ""}`}
     >
-      <div className="w-28 flex-shrink-0">
+      <div className="sm:w-28 flex-shrink-0">
         <p className="text-xs text-gray-500 leading-tight">{item.time}</p>
       </div>
       <div className="flex-1 flex items-start gap-3">

@@ -25,7 +25,7 @@ export default function TicketSection({ onOpenModal }: TicketSectionProps) {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-3 gap-6 items-start mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-start mb-8">
           {tickets.map((ticket) => {
             const isVip = ticket.id === "vip";
             const isGroup = ticket.id === "group";
