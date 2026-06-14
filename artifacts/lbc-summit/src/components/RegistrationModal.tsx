@@ -73,17 +73,34 @@ export default function RegistrationModal({
     setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate(form);
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
       return;
     }
-    // TODO: Connect Stripe Checkout via summitConfig.stripeGeneralLink / stripeVipLink before launch
-    // TODO: Connect email platform (Mailchimp/ConvertKit) for lead capture before launch
-    console.log("Registration prototype submission:", form);
-    setSubmitted(true);
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const res = await fetch("/api/registrations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Submission failed. Please try again.");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleClose = () => {
@@ -296,13 +313,20 @@ export default function RegistrationModal({
                 )}
               </div>
 
+              {submitError && (
+                <p className="text-red-500 text-sm text-center bg-red-50 border border-red-200 rounded-lg py-2 px-3">
+                  {submitError}
+                </p>
+              )}
+
               <button
                 type="submit"
-                className="w-full bg-[#1a56db] hover:bg-[#1e3a8a] text-white font-bold py-3.5 rounded-xl transition-colors shadow-lg"
+                disabled={submitting}
+                className="w-full bg-[#1a56db] hover:bg-[#1e3a8a] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl transition-colors shadow-lg"
                 data-testid="button-submit-registration"
                 style={{ fontFamily: "var(--app-font-heading)" }}
               >
-                Reserve My Seat
+                {submitting ? "Submitting..." : "Reserve My Seat"}
               </button>
 
               <p className="text-gray-400 text-xs text-center">
