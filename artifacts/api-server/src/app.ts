@@ -41,7 +41,7 @@ const staticDir = path.resolve(__dirname, "../../lbc-summit/dist/public");
 if (existsSync(staticDir)) {
   app.use(express.static(staticDir));
   // SPA fallback — serve index.html for any non-API route
-  app.get("*", (_req, res) => {
+  app.get("/{*splat}", (_req, res) => {
     res.sendFile(path.join(staticDir, "index.html"));
   });
 }
