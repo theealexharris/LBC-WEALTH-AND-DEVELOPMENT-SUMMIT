@@ -1,0 +1,20 @@
+export const summitConfig = {
+  eventName: "LBC Wealth and Development Summit",
+  presentedBy: "Redefined Mindset",
+  theme: "Transform Your Mindset. Rebuild Your Identity. Develop Your Wealth.",
+  date: "To Be Confirmed — 2026",
+  venue: "To Be Confirmed",
+  city: "Long Beach, California",
+  generalAdmissionPrice: "To Be Confirmed",
+  vipPrice: "To Be Confirmed",
+  contactEmail: "info@redefinedmindset.com",
+  contactPhone: "To Be Confirmed",
+  stripeGeneralLink: "#",
+  stripeVipLink: "#",
+  socialLinks: {
+    instagram: "#",
+    facebook: "#",
+    linkedin: "#",
+    twitter: "#",
+  },
+};

@@ -1,0 +1,1073 @@
+The two reference sites use complementary conversion strategies. Ramsey’s page emphasizes a clear audience, urgent leadership challenges, speaker authority, transformation-focused outcomes, testimonials, agenda navigation, repeated registration calls to action, and industry relevance. BetterUp uses a more modern, premium editorial style built around a strong event theme, executive credibility, recognizable organizations, research-backed insights, downloadable resources, and concise outcome-oriented messaging. ([Ramsey Solutions][1])
+
+The master prompt below combines Ramsey’s direct-response event conversion structure with BetterUp’s polished, high-authority presentation. It is written for the **LBC Wealth and Development Summit**, while keeping unknown details editable.
+
+## Recommended Two-Day Summit Schedule
+
+This schedule assumes:
+
+* **Day One:** Six hours of general programming plus a separate one-hour VIP session
+* **Day Two:** Four hours of general training plus a separate one-hour VIP session
+* **Seven total speakers**
+* **Two keynote speakers:** 60 minutes each
+* **Five featured speakers:** 40 minutes each, remaining within the requested 35–45-minute range
+* General admission attendees receive ten programming hours
+* VIP attendees receive twelve total hours, including both VIP sessions
+
+### Day One — Transformation, Vision and Wealth Development
+
+**General Session: 9:00 a.m.–3:00 p.m.**
+**VIP Session: 3:15 p.m.–4:15 p.m.**
+
+| Time                  | Program                                                         |
+| --------------------- | --------------------------------------------------------------- |
+| 8:15–9:00 a.m.        | Registration, networking, music and sponsor engagement          |
+| 9:00–9:15 a.m.        | Summit opening, welcome and event vision                        |
+| 9:15–10:15 a.m.       | **Keynote Speaker 1 — 60-minute opening keynote**               |
+| 10:15–10:30 a.m.      | Break and networking                                            |
+| 10:30–11:10 a.m.      | **Featured Speaker 1 — 40-minute presentation**                 |
+| 11:10–11:50 a.m.      | **Featured Speaker 2 — 40-minute presentation**                 |
+| 11:50 a.m.–12:30 p.m. | Lunch and networking                                            |
+| 12:30–1:10 p.m.       | **Featured Speaker 3 — 40-minute presentation**                 |
+| 1:10–1:25 p.m.        | Audience reflection and implementation exercise                 |
+| 1:25–2:05 p.m.        | Moderated leadership and wealth-building panel                  |
+| 2:05–2:20 p.m.        | Break                                                           |
+| 2:20–2:50 p.m.        | Transformation workshop and personal action-plan exercise       |
+| 2:50–3:00 p.m.        | Day One closing, announcements and Day Two preview              |
+| 3:15–4:15 p.m.        | **VIP Session 1 — Private keynote debrief, Q&A and networking** |
+
+### Day Two — Implementation and Development Training
+
+**General Session: 9:00 a.m.–1:00 p.m.**
+**VIP Session: 1:15 p.m.–2:15 p.m.**
+
+| Time                  | Program                                                                              |
+| --------------------- | ------------------------------------------------------------------------------------ |
+| 8:30–9:00 a.m.        | Arrival, networking and continental refreshments                                     |
+| 9:00–9:10 a.m.        | Day Two opening and implementation challenge                                         |
+| 9:10–10:10 a.m.       | **Keynote Speaker 2 — 60-minute keynote training**                                   |
+| 10:10–10:25 a.m.      | Break                                                                                |
+| 10:25–11:05 a.m.      | **Featured Speaker 4 — 40-minute training**                                          |
+| 11:05–11:45 a.m.      | **Featured Speaker 5 — 40-minute training**                                          |
+| 11:45 a.m.–12:15 p.m. | Guided implementation workshop                                                       |
+| 12:15–12:45 p.m.      | Seven-speaker summit panel and audience Q&A                                          |
+| 12:45–1:00 p.m.       | Commitments, closing message and call to action                                      |
+| 1:15–2:15 p.m.        | **VIP Session 2 — Private implementation lab, speaker access and closing reception** |
+
+---
+
+## Replit Master Website-Build Prompt
+
+# MASTER REPLIT BUILD PROMPT
+
+## LBC WEALTH AND DEVELOPMENT SUMMIT
+
+### Premium, High-Conversion Two-Day Event Landing Page
+
+Act as an elite conversion-focused website strategist, senior UX/UI designer, event-marketing copywriter, brand architect and full-stack React developer with more than 20 years of combined experience building premium conference, leadership, personal-development and wealth-education websites.
+
+Your assignment is to design and build a polished, visually commanding, mobile-responsive prototype landing page for:
+
+**Event Name:** LBC Wealth and Development Summit
+**Presented By:** Redefined Mindset
+**Core Positioning:** A transformational two-day summit centered on personal development, mindset renewal, identity rebuilding, financial education, wealth development, leadership, entrepreneurship and purposeful action.
+
+The website must feel like a nationally recognized, premium leadership and wealth-development event—not a basic local event page, generic template or low-cost seminar website.
+
+Use the following websites only as strategic inspiration for information architecture, premium presentation, storytelling, conversion flow and event credibility:
+
+1. Ramsey Solutions EntreLeadership Summit
+2. BetterUp Agents of Change / Uplift
+
+Do not copy either site’s copyrighted language, exact layout, brand identity, graphics, photographs, logos or proprietary design. Create an original design for the LBC Wealth and Development Summit.
+
+---
+
+# 1. PRIMARY WEBSITE OBJECTIVE
+
+The primary objective is to convert qualified visitors into:
+
+1. General-admission ticket purchasers;
+2. VIP ticket purchasers;
+3. Email subscribers or early-access registrants;
+4. Sponsor or partnership inquiries;
+5. Group and organizational ticket inquiries.
+
+The page must quickly answer:
+
+* What is the summit?
+* Who is it designed for?
+* Why should someone attend?
+* What transformation will attendees experience?
+* Who are the speakers?
+* What will attendees learn?
+* What happens during each day?
+* What makes the VIP experience valuable?
+* Where and when is the summit?
+* How much are tickets?
+* Why should a visitor register now?
+* Is the event credible, professional and worth the investment?
+
+---
+
+# 2. TARGET AUDIENCE
+
+Design the experience for ambitious adults who are ready to move beyond survival, uncertainty or stagnation and begin building a stronger life, identity, career, business and financial future.
+
+Primary audiences include:
+
+* Aspiring and established entrepreneurs;
+* Small-business owners;
+* Professionals and emerging leaders;
+* Veterans and first responders;
+* Individuals rebuilding after adversity or major life transitions;
+* Community leaders;
+* Coaches, consultants and service providers;
+* People seeking financial education and wealth-development strategies;
+* Individuals ready for personal transformation and mindset renewal;
+* Organizations interested in employee, veteran or community development.
+
+Avoid making the event appear to be exclusively for one profession, age group or income level.
+
+---
+
+# 3. CENTRAL BRAND MESSAGE
+
+Build the page around the idea that sustainable wealth begins with internal transformation.
+
+Suggested positioning concept:
+
+**Transform Your Mindset. Rebuild Your Identity. Develop Your Wealth.**
+
+Supporting message:
+
+The LBC Wealth and Development Summit is a two-day transformational experience designed to help attendees break limiting patterns, renew their thinking, strengthen their personal and professional identity, develop practical financial knowledge, and leave with a clear strategy for purposeful growth.
+
+The copy should communicate that attendees will receive more than motivation. They will receive practical tools, frameworks, training, relationships and an implementation plan.
+
+---
+
+# 4. BRAND PERSONALITY
+
+The website must feel:
+
+* Bold;
+* Transformational;
+* Premium;
+* Inspirational;
+* Sophisticated;
+* Credible;
+* Inclusive;
+* Forward-looking;
+* Community-centered;
+* Action-oriented;
+* Financially empowering;
+* Emotionally intelligent.
+
+Avoid:
+
+* Excessive hype;
+* Unrealistic wealth promises;
+* “Get rich quick” language;
+* Overly aggressive sales tactics;
+* Generic motivational clichés;
+* Cheap-looking gradients;
+* Excessive animation;
+* Cluttered sections;
+* Unverified statistics;
+* Fake testimonials;
+* Fake ticket scarcity;
+* Fake sponsor logos;
+* Guarantees of income or financial results.
+
+---
+
+# 5. VISUAL DIRECTION
+
+Create a premium visual identity inspired by executive conferences, transformational leadership events and modern wealth-development brands.
+
+## Recommended color palette
+
+* Royal blue as the dominant brand color;
+* Deep navy or near-black for authority and contrast;
+* White for clarity and premium spacing;
+* Warm gold as a restrained accent for wealth, excellence and VIP elements;
+* Soft gray or off-white backgrounds for alternating content sections.
+
+## Typography
+
+Use a modern, accessible and premium font pairing such as:
+
+* Headings: Manrope, Montserrat, Sora or Plus Jakarta Sans;
+* Body: Inter, Source Sans 3 or Open Sans.
+
+Headlines should be bold and confident. Body copy should remain highly readable.
+
+## Design characteristics
+
+* Generous white space;
+* Strong visual hierarchy;
+* Large, impactful headlines;
+* Editorial-style speaker photography;
+* Premium card designs;
+* Subtle shadows and borders;
+* Rounded corners used consistently;
+* Restrained scroll animations;
+* High-quality iconography;
+* Clear calls to action;
+* Alternating dark and light sections;
+* Mobile-first responsive behavior;
+* Accessible contrast ratios;
+* Strong focus states;
+* Clear hover states.
+
+Use temporary image placeholders where final summit, speaker, venue or audience images are unavailable. Clearly label all placeholders so they can easily be replaced.
+
+---
+
+# 6. TECHNICAL BUILD REQUIREMENTS
+
+Build the prototype using:
+
+* React;
+* TypeScript;
+* Vite;
+* Tailwind CSS;
+* Lucide React icons;
+* Framer Motion for restrained animations;
+* Reusable component architecture;
+* Responsive navigation;
+* Semantic HTML;
+* Accessible form labels and controls;
+* WCAG-conscious contrast and keyboard navigation.
+
+Do not overengineer the prototype.
+
+The project must:
+
+* Run correctly in Replit;
+* Use a clean directory structure;
+* Include reusable data arrays for speakers, agenda items, FAQs, ticket options and testimonials;
+* Avoid hard-coding repeated cards;
+* Contain no broken imports;
+* Contain no console errors;
+* Work at mobile, tablet, laptop and large-desktop widths;
+* Include smooth scrolling;
+* Include active navigation states where practical;
+* Include loading-safe image fallbacks;
+* Include meaningful alt text;
+* Respect reduced-motion browser settings.
+
+---
+
+# 7. STICKY NAVIGATION
+
+Create a premium sticky navigation bar.
+
+## Desktop navigation
+
+Include:
+
+* Summit logo or text-based logo placeholder;
+* About;
+* Speakers;
+* Experience;
+* Agenda;
+* VIP;
+* Tickets;
+* FAQ;
+* A highly visible “Reserve Your Seat” button.
+
+## Mobile navigation
+
+Include:
+
+* Logo;
+* Hamburger menu;
+* Slide-down or slide-in mobile navigation;
+* Persistent registration button where space permits.
+
+The navigation must become slightly more compact after scrolling.
+
+---
+
+# 8. HERO SECTION
+
+Create a full-width, high-impact hero section.
+
+Include:
+
+* Event logo or summit name;
+* Event date placeholder;
+* City and venue placeholder;
+* “Two-Day Transformational Summit” label;
+* Powerful primary headline;
+* Strong supporting paragraph;
+* General-admission call-to-action button;
+* VIP call-to-action button;
+* Short credibility line;
+* Seven-speaker indicator;
+* Ten hours of general summit programming;
+* Two private VIP experiences;
+* Countdown component that can be activated once the event date is confirmed.
+
+Suggested hero headline:
+
+**Your Next Level Requires a New Mindset, a Stronger Identity and a Clearer Wealth Strategy.**
+
+Suggested supporting copy:
+
+Join entrepreneurs, professionals, veterans, community leaders and purpose-driven individuals for two transformative days of mindset renewal, financial development, leadership training and practical implementation.
+
+Suggested buttons:
+
+* Reserve Your Seat
+* Explore the VIP Experience
+
+Add a premium event image, speaker collage or cinematic summit background placeholder. Use a dark overlay to preserve text readability.
+
+---
+
+# 9. EVENT CREDIBILITY STRIP
+
+Immediately beneath the hero, add a concise credibility strip showing:
+
+* Two transformative days;
+* Seven expert speakers;
+* Two one-hour keynotes;
+* Five featured training sessions;
+* Two exclusive VIP experiences;
+* Practical action planning.
+
+Do not use unsupported attendance numbers or partner logos.
+
+When real partners or sponsors are provided, create a replaceable logo strip titled:
+
+**Supported by Organizations Committed to Community Growth**
+
+---
+
+# 10. PROBLEM-TO-TRANSFORMATION SECTION
+
+Create an emotionally intelligent section that addresses the visitor’s current reality.
+
+Suggested heading:
+
+**You Were Not Created to Remain in Survival Mode.**
+
+Discuss challenges such as:
+
+* Feeling stuck despite working hard;
+* Carrying outdated beliefs;
+* Lacking financial direction;
+* Struggling to turn ideas into action;
+* Rebuilding after adversity;
+* Wanting to lead but lacking a clear plan;
+* Earning income without developing long-term wealth;
+* Having vision without structure or accountability.
+
+Then transition into the event promise:
+
+The summit will help attendees replace confusion with clarity, hesitation with action, and short-term survival thinking with intentional personal and financial development.
+
+Include a strong registration call to action.
+
+---
+
+# 11. SUMMIT PILLARS SECTION
+
+Create six visually distinctive pillar cards.
+
+## Pillar 1: Mindset Renewal
+
+Help attendees identify limiting beliefs, renew their thinking and develop the mental discipline required for purposeful progress.
+
+## Pillar 2: Identity Rebuilding
+
+Help attendees reconnect with their strengths, values, experiences and capacity to lead.
+
+## Pillar 3: Financial Development
+
+Provide practical education concerning financial habits, planning, stewardship, wealth-building principles and long-term decision-making.
+
+## Pillar 4: Entrepreneurship and Opportunity
+
+Help attendees identify opportunities, clarify business ideas and develop an action-oriented entrepreneurial mindset.
+
+## Pillar 5: Leadership and Influence
+
+Strengthen communication, resilience, confidence, decision-making and the ability to positively influence others.
+
+## Pillar 6: Purposeful Implementation
+
+Move attendees beyond inspiration by helping them develop a personal implementation plan.
+
+Each card should contain:
+
+* Icon;
+* Short title;
+* Two- or three-sentence description;
+* Hover treatment;
+* Subtle animation.
+
+---
+
+# 12. WHO SHOULD ATTEND
+
+Create a section titled:
+
+**This Summit Was Built for People Ready to Move Forward.**
+
+Include audience cards for:
+
+* Entrepreneurs and business owners;
+* Professionals and emerging leaders;
+* Veterans and first responders;
+* People rebuilding after adversity;
+* Wealth-development learners;
+* Coaches and community leaders;
+* Purpose-driven individuals;
+* Organizational and group attendees.
+
+End with:
+
+You do not need to have everything figured out. You need the willingness to learn, confront old patterns and take intentional action.
+
+---
+
+# 13. SPEAKER SECTION
+
+Create a premium seven-speaker grid.
+
+Two speakers must be visually designated as:
+
+**Keynote Speaker — 60 Minutes**
+
+The remaining five must be designated as:
+
+**Featured Speaker — 40 Minutes**
+
+Each speaker card must include editable placeholders for:
+
+* Professional headshot;
+* Full name;
+* Professional title;
+* Company or organization;
+* Speaker category;
+* Session title;
+* One-sentence transformation promise;
+* Short biography;
+* Social-media or website links;
+* “View Full Bio” modal or expandable panel.
+
+Do not invent actual speaker credentials.
+
+Use the following temporary structure:
+
+1. Keynote Speaker 1 — Mindset, identity or transformational leadership;
+2. Keynote Speaker 2 — Wealth development, entrepreneurship or implementation;
+3. Featured Speaker 1 — Personal transformation;
+4. Featured Speaker 2 — Financial development;
+5. Featured Speaker 3 — Entrepreneurship;
+6. Featured Speaker 4 — Leadership and influence;
+7. Featured Speaker 5 — Purpose, resilience or execution.
+
+Above the cards, include:
+
+**Seven Voices. One Mission: Helping You Build What Comes Next.**
+
+The speaker descriptions should focus on what attendees will learn, not merely the speakers’ accomplishments.
+
+Add the disclaimer:
+
+Speaker lineup and session topics are subject to change.
+
+---
+
+# 14. TWO-DAY EXPERIENCE SECTION
+
+Create a visually engaging split section comparing Day One and Day Two.
+
+## Day One: Transformation, Vision and Wealth Development
+
+Describe Day One as the foundation-building experience. Attendees examine mindset, identity, purpose, leadership and financial direction.
+
+Include:
+
+* Six hours of general programming;
+* Opening keynote;
+* Three featured speaker sessions;
+* Leadership panel;
+* Guided reflection;
+* Networking opportunities;
+* One-hour VIP session following the main program.
+
+## Day Two: Implementation and Development Training
+
+Describe Day Two as the action and implementation experience.
+
+Include:
+
+* Four hours of concentrated general training;
+* Closing keynote;
+* Two featured speaker sessions;
+* Guided implementation workshop;
+* Seven-speaker panel;
+* Personal commitment exercise;
+* One-hour VIP implementation session.
+
+Add an “Explore the Full Agenda” button.
+
+---
+
+# 15. INTERACTIVE AGENDA
+
+Create a responsive agenda with Day One and Day Two tabs.
+
+## DAY ONE — GENERAL SESSION
+
+### 9:00 a.m.–3:00 p.m.
+
+* 8:15–9:00 a.m. — Registration, networking and sponsor engagement
+* 9:00–9:15 a.m. — Summit opening and welcome
+* 9:15–10:15 a.m. — Keynote Speaker 1
+* 10:15–10:30 a.m. — Break
+* 10:30–11:10 a.m. — Featured Speaker 1
+* 11:10–11:50 a.m. — Featured Speaker 2
+* 11:50 a.m.–12:30 p.m. — Lunch and networking
+* 12:30–1:10 p.m. — Featured Speaker 3
+* 1:10–1:25 p.m. — Reflection and implementation exercise
+* 1:25–2:05 p.m. — Leadership and wealth-building panel
+* 2:05–2:20 p.m. — Break
+* 2:20–2:50 p.m. — Transformation workshop
+* 2:50–3:00 p.m. — Day One closing
+
+## DAY ONE VIP SESSION
+
+### 3:15–4:15 p.m.
+
+* Private keynote debrief;
+* Facilitated VIP discussion;
+* Audience questions;
+* Speaker networking;
+* Premium photographs or meet-and-greet;
+* VIP implementation worksheet.
+
+## DAY TWO — GENERAL SESSION
+
+### 9:00 a.m.–1:00 p.m.
+
+* 8:30–9:00 a.m. — Arrival and networking
+* 9:00–9:10 a.m. — Day Two opening
+* 9:10–10:10 a.m. — Keynote Speaker 2
+* 10:10–10:25 a.m. — Break
+* 10:25–11:05 a.m. — Featured Speaker 4
+* 11:05–11:45 a.m. — Featured Speaker 5
+* 11:45 a.m.–12:15 p.m. — Guided implementation workshop
+* 12:15–12:45 p.m. — Seven-speaker panel and audience Q&A
+* 12:45–1:00 p.m. — Commitments and closing message
+
+## DAY TWO VIP SESSION
+
+### 1:15–2:15 p.m.
+
+* Private implementation lab;
+* Direct speaker access;
+* Advanced question-and-answer session;
+* Networking with VIP attendees;
+* Personal 30-, 60- and 90-day planning;
+* VIP closing reception.
+
+Agenda cards should clearly distinguish:
+
+* Keynotes;
+* Featured presentations;
+* Workshops;
+* Panels;
+* Breaks;
+* VIP programming.
+
+---
+
+# 16. VIP EXPERIENCE SECTION
+
+Create a visually premium dark navy or royal-blue VIP section with restrained gold accents.
+
+Suggested heading:
+
+**Go Beyond the Main Stage With the VIP Experience.**
+
+Explain that VIP admission is designed for attendees seeking deeper access, stronger connections and additional implementation support.
+
+Potential VIP benefits:
+
+* Admission to both general summit days;
+* Access to both one-hour VIP sessions;
+* Preferred seating;
+* Early venue access;
+* VIP credential;
+* Private keynote debriefs;
+* Extended speaker Q&A;
+* Guided implementation workbook;
+* VIP networking;
+* Professional group photograph;
+* Exclusive summit gift;
+* Priority check-in.
+
+Mark benefits as editable pending final confirmation.
+
+Include a side-by-side comparison:
+
+### General Admission
+
+* Both summit days;
+* All seven speaker sessions;
+* Workshops and panels;
+* General networking;
+* Digital or printed summit workbook.
+
+### VIP Admission
+
+* Everything in General Admission;
+* Two private one-hour VIP sessions;
+* Preferred seating;
+* Priority check-in;
+* Enhanced speaker access;
+* VIP networking;
+* Premium summit materials;
+* Exclusive gift or experience.
+
+Use strong but honest language. Do not claim unlimited personal access to speakers.
+
+---
+
+# 17. OUTCOME SECTION
+
+Create a results-oriented section titled:
+
+**Leave With More Than Inspiration. Leave With a Plan.**
+
+Attendees should leave with:
+
+* A renewed personal vision;
+* Greater confidence and clarity;
+* A clearer understanding of their financial habits;
+* Practical wealth-development principles;
+* A stronger leadership identity;
+* New professional and community relationships;
+* A written implementation plan;
+* Defined 30-, 60- and 90-day priorities;
+* Tools for continued accountability;
+* A commitment to purposeful action.
+
+Include a visual sample of an attendee action-plan workbook.
+
+---
+
+# 18. SOCIAL PROOF SECTION
+
+Build a testimonial section, but do not fabricate testimonials.
+
+Until verified testimonials are supplied, use cards clearly labeled:
+
+* Testimonial Placeholder;
+* Previous Attendee Story;
+* Community Partner Statement;
+* Speaker Endorsement Placeholder.
+
+Each testimonial data object should include:
+
+* Quote;
+* Name;
+* Role;
+* Organization;
+* Headshot;
+* Verification status.
+
+Only display published testimonials when “verificationStatus” is set to “verified.”
+
+Create an optional video-testimonial component.
+
+---
+
+# 19. TICKET SECTION
+
+Create three ticket cards:
+
+## General Admission
+
+Include editable placeholders for:
+
+* Regular price;
+* Early-bird price;
+* Ticket inclusions;
+* Payment option;
+* Purchase button.
+
+## VIP Admission
+
+Visually identify this as the premium or recommended option.
+
+Include editable placeholders for:
+
+* Regular price;
+* Early-bird price;
+* VIP benefits;
+* Limited-capacity note;
+* Purchase button.
+
+## Group or Organization Package
+
+Include:
+
+* Group ticket inquiry;
+* Employer or nonprofit participation;
+* Veteran-organization participation;
+* Community partner packages;
+* Contact-sales or request-information button.
+
+Include a transparent note:
+
+Ticket prices, benefits, refund terms and availability must be confirmed before public launch.
+
+Do not display fake crossed-out prices or false scarcity.
+
+---
+
+# 20. REGISTRATION FUNCTIONALITY
+
+For the prototype:
+
+* Create functional ticket-selection buttons;
+* Open a registration modal or navigate to a registration section;
+* Collect first name, last name, email, phone and ticket preference;
+* Include an optional organization field;
+* Include a consent checkbox;
+* Validate required fields;
+* Display a professional success state;
+* Save prototype submissions to local state or a clearly marked mock API;
+* Include a placeholder for future Stripe Checkout integration;
+* Include a placeholder for email-platform integration;
+* Do not process real payments until valid Stripe credentials and product IDs are configured.
+
+Add clear code comments identifying where payment and CRM integrations should be connected.
+
+---
+
+# 21. EVENT LOCATION SECTION
+
+Create a premium venue section containing editable placeholders for:
+
+* Venue name;
+* Street address;
+* City and state;
+* Parking information;
+* Accessibility information;
+* Recommended hotel;
+* Airport information;
+* Map;
+* Venue photograph;
+* Travel notes.
+
+Include buttons for:
+
+* View Map;
+* Get Directions;
+* Explore Accommodations.
+
+Do not invent a confirmed venue.
+
+---
+
+# 22. SPONSOR AND PARTNERSHIP SECTION
+
+Create a section titled:
+
+**Partner With a Movement Focused on Transformation and Development.**
+
+Include opportunities for:
+
+* Corporate sponsors;
+* Local businesses;
+* Financial institutions;
+* Veteran organizations;
+* Nonprofit organizations;
+* Educational organizations;
+* Community-development groups;
+* Media partners;
+* Vendors.
+
+Add buttons:
+
+* View Partnership Opportunities
+* Become a Sponsor
+
+Include a sponsor inquiry form with:
+
+* Contact name;
+* Organization;
+* Email;
+* Phone;
+* Partnership interest;
+* Message.
+
+---
+
+# 23. FREQUENTLY ASKED QUESTIONS
+
+Create an accessible accordion covering:
+
+1. Who should attend the summit?
+2. Is the event appropriate for beginning entrepreneurs?
+3. Do I need previous financial or business experience?
+4. What is included with General Admission?
+5. What is included with VIP Admission?
+6. Are meals included?
+7. Is parking available?
+8. Is the venue accessible?
+9. Can organizations purchase group tickets?
+10. Are tickets transferable?
+11. What is the refund policy?
+12. Will sessions be recorded?
+13. Can children attend?
+14. What should attendees bring?
+15. How can my organization sponsor the summit?
+16. Are speaker sessions or schedules subject to change?
+
+Use editable answers where policies remain unconfirmed. Never create a binding refund policy without organizer approval.
+
+---
+
+# 24. FINAL CONVERSION SECTION
+
+Create a dramatic closing section.
+
+Suggested headline:
+
+**The Future You Want Will Require a Decision From the Person You Are Today.**
+
+Suggested supporting copy:
+
+Two days can introduce a new way of thinking, stronger relationships and a practical plan for what comes next. Reserve your place at the LBC Wealth and Development Summit and begin building with greater clarity, confidence and purpose.
+
+Buttons:
+
+* Reserve General Admission
+* Upgrade to VIP
+
+Add the date, location and limited-capacity message only when verified.
+
+---
+
+# 25. FOOTER
+
+Include:
+
+* Redefined Mindset logo placeholder;
+* LBC Wealth and Development Summit;
+* About;
+* Speakers;
+* Agenda;
+* Tickets;
+* VIP;
+* Sponsor inquiry;
+* Contact;
+* Privacy Policy;
+* Terms and Conditions;
+* Accessibility;
+* Refund Policy;
+* Social-media links;
+* Copyright notice.
+
+Add a professional disclaimer:
+
+The summit provides educational and informational content concerning personal development, leadership, entrepreneurship and general financial principles. It does not provide individualized legal, tax, investment or financial advice and does not guarantee business, income or investment results.
+
+---
+
+# 26. CONVERSION FEATURES
+
+Use the following conversion features responsibly:
+
+* Repeated registration buttons at natural decision points;
+* Sticky mobile ticket button;
+* Scroll-based section navigation;
+* VIP comparison table;
+* Clear ticket inclusions;
+* Speaker outcome statements;
+* Agenda tabs;
+* FAQ accordion;
+* Trust-building policy links;
+* Sponsor inquiry form;
+* Exit-intent or timed email invitation only if it is unobtrusive;
+* Countdown only after the actual event date is entered;
+* Capacity notices only when factually accurate.
+
+Do not use manipulative dark patterns.
+
+---
+
+# 27. SEO AND SOCIAL SHARING
+
+Create editable metadata for:
+
+* Page title;
+* Meta description;
+* Open Graph title;
+* Open Graph description;
+* Open Graph image;
+* Twitter/X card;
+* Canonical URL;
+* Event structured data;
+* Organization structured data;
+* FAQ structured data where appropriate.
+
+Suggested page title:
+
+LBC Wealth and Development Summit | Transform, Develop and Build
+
+Suggested meta description:
+
+Join seven speakers for a two-day summit focused on mindset renewal, identity rebuilding, leadership, financial development, entrepreneurship and purposeful implementation.
+
+Create clean section IDs and semantic heading order.
+
+---
+
+# 28. PERFORMANCE REQUIREMENTS
+
+Optimize for:
+
+* Fast initial page load;
+* Compressed responsive images;
+* Lazy-loaded images below the fold;
+* Minimal layout shift;
+* Efficient animations;
+* Reusable components;
+* Lighthouse-friendly performance;
+* No autoplay audio;
+* No large unoptimized background videos;
+* Accessible forms and controls.
+
+---
+
+# 29. COMPONENT STRUCTURE
+
+Organize the application using components similar to:
+
+* Header
+* MobileMenu
+* Hero
+* Countdown
+* CredibilityStrip
+* TransformationSection
+* SummitPillars
+* AudienceSection
+* SpeakerGrid
+* SpeakerCard
+* SpeakerModal
+* ExperienceComparison
+* AgendaTabs
+* AgendaItem
+* VIPSection
+* TicketComparison
+* OutcomesSection
+* Testimonials
+* VenueSection
+* SponsorSection
+* FAQAccordion
+* RegistrationModal
+* NewsletterForm
+* FinalCTA
+* Footer
+
+Create separate data files for:
+
+* summitConfig;
+* speakers;
+* agenda;
+* ticketOptions;
+* testimonials;
+* FAQs;
+* sponsors.
+
+---
+
+# 30. EDITABLE SUMMIT CONFIGURATION
+
+Create a central configuration object containing:
+
+* Event name;
+* Event theme;
+* Event date;
+* Registration deadline;
+* Venue;
+* City;
+* State;
+* General-admission price;
+* VIP price;
+* Group-ticket details;
+* Stripe links;
+* Contact email;
+* Contact phone;
+* Social-media URLs;
+* Speaker information;
+* Sponsor logos;
+* Policy URLs;
+* Hero image;
+* Event logo.
+
+Every unknown field must be labeled “To Be Confirmed” rather than populated with invented information.
+
+---
+
+# 31. FINAL QUALITY STANDARD
+
+Before completing the build, verify that:
+
+* The landing page looks premium and nationally competitive;
+* The event value is understandable within five seconds;
+* The distinction between General Admission and VIP is clear;
+* The agenda accurately represents a six-hour Day One and four-hour Day Two;
+* Both one-hour VIP sessions are clearly separate from general programming;
+* There are exactly seven speaker profiles;
+* Two speakers have 60-minute keynotes;
+* Five speakers have 40-minute presentations;
+* No speaker credentials are fabricated;
+* No testimonials are fabricated;
+* No prices, dates, locations or attendance figures are invented;
+* All buttons have a working prototype interaction;
+* The navigation works on desktop and mobile;
+* Forms contain validation and success states;
+* The design is responsive;
+* The code has no broken imports or console errors;
+* The project runs successfully in Replit.
+
+Build the complete prototype now. Do not provide only a design explanation or wireframe. Generate the functioning React website, its reusable components, sample editable data, responsive styling and setup instructions.
+
+## Strategic Landing-Page Order
+
+For the strongest conversion flow, the Replit prototype should display the sections in this order:
+
+1. Sticky navigation
+2. Hero and primary registration offer
+3. Summit credibility strip
+4. Visitor problem and event transformation
+5. Six summit pillars
+6. Who should attend
+7. Seven-speaker lineup
+8. Day One versus Day Two experience
+9. Interactive agenda
+10. VIP experience
+11. Attendee outcomes
+12. Testimonials or verified social proof
+13. Ticket comparison
+14. Venue and travel
+15. Sponsors and partnerships
+16. Frequently asked questions
+17. Final registration call to action
+18. Legal and informational footer
+
+This order moves the visitor from **attention**, to **personal relevance**, to **event credibility**, to **program details**, to **offer comparison**, and finally to **registration**.
+
+[1]: https://www.ramseysolutions.com/events/entreleadership-summit "EntreLeadership Summit 2027 | San Diego, California - Ramsey"
