@@ -1,15 +1,14 @@
 services:
   - type: web
-    name: lbc-wealth-summit
+    name: LBC-WEALTH-AND-DEVELOPMENT-SUMMIT
     runtime: node
     region: oregon
     plan: free
-    buildCommand: npm install -g pnpm && pnpm install --frozen-lockfile && pnpm run build:render
-    startCommand: pnpm run start
+    buildCommand: npm install -g pnpm@10 && pnpm install --frozen-lockfile && pnpm --filter @workspace/lbc-summit run build && pnpm --filter @workspace/api-server run build
+    startCommand: node --enable-source-maps ./artifacts/api-server/dist/index.mjs
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
     healthCheckPath: /api/healthz
-    autoDeploy: true
