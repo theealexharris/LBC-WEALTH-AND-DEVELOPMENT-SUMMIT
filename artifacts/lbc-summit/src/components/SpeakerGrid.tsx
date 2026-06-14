@@ -119,7 +119,7 @@ export default function SpeakerGrid() {
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest text-center mb-6">
             Featured Speakers
           </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
             {featured.map((s) => (
               <SpeakerCard key={s.id} speaker={s} onView={() => setSelected(s)} />
             ))}

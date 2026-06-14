@@ -103,7 +103,7 @@ export default function RegistrationModal({
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && handleClose()}>
-      <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-lg w-[calc(100vw-2rem)] max-h-[90dvh] overflow-y-auto mx-4 sm:mx-auto">
         {submitted ? (
           <div className="text-center py-8">
             <div className="w-16 h-16 rounded-full bg-green-50 border-2 border-green-500 flex items-center justify-center mx-auto mb-5">
@@ -148,7 +148,7 @@ export default function RegistrationModal({
             </DialogHeader>
 
             <form onSubmit={handleSubmit} className="space-y-4 mt-2" noValidate>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label
                     htmlFor="reg-firstName"
