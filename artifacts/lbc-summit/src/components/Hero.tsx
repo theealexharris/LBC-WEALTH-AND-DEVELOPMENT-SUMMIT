@@ -39,11 +39,27 @@ export default function Hero({ onOpenModal }: HeroProps) {
           />
         </div>
 
-        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 mb-6">
-          <span className="w-2 h-2 rounded-full bg-[#c79d35] animate-pulse" />
-          <span className="text-gray-200 text-sm font-medium tracking-wide">
-            Two-Day Transformational Summit &nbsp;·&nbsp; Long Beach, California
-          </span>
+        <div className="inline-flex flex-col items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl px-8 py-5 mb-6">
+          <div className="flex items-center gap-3">
+            <span className="w-3 h-3 rounded-full bg-[#c79d35] animate-pulse flex-shrink-0" />
+            <span className="text-white text-lg sm:text-xl font-bold tracking-wide" style={{ fontFamily: "var(--app-font-heading)" }}>
+              Two-Day Transformational Summit &nbsp;·&nbsp; Long Beach, California
+            </span>
+          </div>
+          <div className="w-full border-t border-white/15" />
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 text-center">
+            <div className="flex flex-col items-center">
+              <span className="text-[#c79d35] text-xs font-bold uppercase tracking-widest mb-0.5">Day 1</span>
+              <span className="text-gray-200 text-sm font-semibold">August 15, 2026 &nbsp;@&nbsp; 10am – 4pm</span>
+              <span className="text-gray-400 text-xs mt-0.5">VIP: 4pm – 5pm</span>
+            </div>
+            <div className="hidden sm:block w-px bg-white/20" />
+            <div className="flex flex-col items-center">
+              <span className="text-[#c79d35] text-xs font-bold uppercase tracking-widest mb-0.5">Day 2</span>
+              <span className="text-gray-200 text-sm font-semibold">August 16, 2026 &nbsp;@&nbsp; 1pm – 5pm</span>
+              <span className="text-gray-400 text-xs mt-0.5">VIP: 5pm – 6pm</span>
+            </div>
+          </div>
         </div>
 
         <h1
@@ -97,7 +113,7 @@ export default function Hero({ onOpenModal }: HeroProps) {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-gray-400 text-sm">
           <span className="flex items-center gap-2">
             <Calendar size={16} className="text-[#c79d35]" />
-            Event Date: To Be Confirmed — 2026
+            August 15–16, 2026
           </span>
           <span className="flex items-center gap-2">
             <MapPin size={16} className="text-[#c79d35]" />
