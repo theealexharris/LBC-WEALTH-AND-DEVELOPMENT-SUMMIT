@@ -1,12 +1,17 @@
-import express, { type Express } from "express";
+import express, { type Express, type Request } from "express";
 import cors from "cors";
 import pinoHttp from "pino-http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { existsSync } from "node:fs";
 import router from "./routes";
-import webhooksRouter from "./routes/webhooks";
 import { logger } from "./lib/logger";
+
+declare module "express-serve-static-core" {
+  interface Request {
+    rawBody?: Buffer;
+  }
+}
 
 const app: Express = express();
 
@@ -29,18 +34,24 @@ app.use(
     },
   }),
 );
+
 const allowedOrigin = process.env["FRONTEND_URL"] ?? "https://lbc-wealth-and-development-summit.onrender.com";
 app.use(
   cors({
     origin: process.env["NODE_ENV"] === "production" ? allowedOrigin : true,
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
+    methods: ["GET", "POST", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
-// Stripe webhook needs raw body — mount before JSON middleware
-app.use("/api", express.raw({ type: "application/json" }), webhooksRouter);
 
-app.use(express.json());
+// Parse JSON — save raw body so the Stripe webhook handler can verify signatures
+app.use(
+  express.json({
+    verify: (_req: Request, _res, buf) => {
+      (_req as Request & { rawBody?: Buffer }).rawBody = buf;
+    },
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", router);

@@ -31,10 +31,12 @@ router.post(
     let event: Stripe.Event;
 
     try {
-      if (webhookSecret && sig) {
-        event = stripe.webhooks.constructEvent(req.body as Buffer, sig, webhookSecret);
+      const rawBody = (req as typeof req & { rawBody?: Buffer }).rawBody;
+      if (webhookSecret && sig && rawBody) {
+        event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
       } else {
-        event = JSON.parse((req.body as Buffer).toString()) as Stripe.Event;
+        const body = rawBody ? rawBody.toString() : JSON.stringify(req.body);
+        event = JSON.parse(body) as Stripe.Event;
       }
     } catch (err) {
       logger.error({ err }, "Webhook signature verification failed");
