@@ -7,12 +7,6 @@ import { existsSync } from "node:fs";
 import router from "./routes";
 import { logger } from "./lib/logger";
 
-declare module "express-serve-static-core" {
-  interface Request {
-    rawBody?: Buffer;
-  }
-}
-
 const app: Express = express();
 
 app.use(

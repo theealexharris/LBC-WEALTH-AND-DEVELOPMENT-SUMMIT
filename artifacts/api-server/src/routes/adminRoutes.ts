@@ -54,7 +54,8 @@ function escapeCSVCell(value: string): string {
 
 // ── Routes ───────────────────────────────────────────────────────────────────
 router.post("/admin/login", (req, res) => {
-  const ip = (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim()
+  const forwarded = req.headers["x-forwarded-for"];
+  const ip = (Array.isArray(forwarded) ? forwarded[0] : forwarded)?.split(",")[0]?.trim()
     ?? req.socket.remoteAddress
     ?? "unknown";
 
@@ -146,7 +147,7 @@ router.get("/admin/registrations", requireAdmin, async (req, res) => {
 });
 
 router.patch("/admin/attendees/:registrationId/checkin", requireAdmin, async (req, res) => {
-  const { registrationId } = req.params;
+  const registrationId = String(req.params["registrationId"] ?? "");
 
   // Validate registration ID format
   if (!/^LBC-2026-[A-F0-9]{6}$/i.test(registrationId)) {
@@ -239,7 +240,7 @@ router.get("/admin/export", requireAdmin, async (req, res) => {
 });
 
 router.get("/admin/attendees/:registrationId/qr", requireAdmin, async (req, res) => {
-  const { registrationId } = req.params;
+  const registrationId = String(req.params["registrationId"] ?? "");
 
   if (!/^LBC-2026-[A-F0-9]{6}$/i.test(registrationId)) {
     res.status(400).json({ error: "Invalid registration ID format" });

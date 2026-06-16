@@ -2,6 +2,8 @@ import { Router } from "express";
 import { logger } from "../lib/logger";
 import { getPool } from "../lib/db";
 
+const router = Router();
+
 const EMAIL_RE = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
 
 router.post("/sponsor-inquiries", async (req, res) => {
