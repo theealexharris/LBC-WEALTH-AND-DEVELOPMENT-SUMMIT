@@ -5,11 +5,11 @@ import SpeakerModal from "@/components/SpeakerModal";
 function SpeakerAvatar({ name, photo, isKeynote }: { name: string; photo?: string; isKeynote?: boolean }) {
   if (photo) {
     return (
-      <div className={`mx-auto mb-5 overflow-hidden rounded-2xl border border-[#1a56db]/20 shadow-md ${isKeynote ? "w-full h-56" : "w-full h-44"}`}>
+      <div className={`mx-auto mb-5 overflow-hidden rounded-2xl border border-[#1a56db]/20 shadow-md bg-gray-50 ${isKeynote ? "w-full h-96" : "w-full h-44"}`}>
         <img
           src={photo}
           alt={name}
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-contain object-center"
         />
       </div>
     );
