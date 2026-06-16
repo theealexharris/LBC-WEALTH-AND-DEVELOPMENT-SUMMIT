@@ -2,10 +2,9 @@ import { Router } from "express";
 import { logger } from "../lib/logger";
 import { getPool } from "../lib/db";
 import { sendSponsorInquiryEmail } from "../lib/email";
+import { EMAIL_RE } from "../lib/validators";
 
 const router = Router();
-
-const EMAIL_RE = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
 
 router.post("/sponsor-inquiries", async (req, res) => {
   const { name, organization, email, phone, interest, message } = req.body;

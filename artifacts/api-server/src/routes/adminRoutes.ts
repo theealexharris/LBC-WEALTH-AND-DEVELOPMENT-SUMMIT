@@ -3,6 +3,7 @@ import { timingSafeEqual, createHash } from "node:crypto";
 import jwt from "jsonwebtoken";
 import { logger } from "../lib/logger";
 import { getPool } from "../lib/db";
+import { REGISTRATION_ID_RE } from "../lib/validators";
 
 const router = Router();
 
@@ -150,7 +151,7 @@ router.patch("/admin/attendees/:registrationId/checkin", requireAdmin, async (re
   const registrationId = String(req.params["registrationId"] ?? "");
 
   // Validate registration ID format
-  if (!/^LBC-2026-[A-F0-9]{6}$/i.test(registrationId)) {
+  if (!REGISTRATION_ID_RE.test(registrationId)) {
     res.status(400).json({ error: "Invalid registration ID format" });
     return;
   }
@@ -162,22 +163,21 @@ router.patch("/admin/attendees/:registrationId/checkin", requireAdmin, async (re
   }
 
   try {
-    const current = await db.query(
-      "SELECT checked_in FROM attendees WHERE registration_id = $1",
+    // Atomic toggle — avoids TOCTOU race condition from read-then-update pattern
+    const result = await db.query(
+      `UPDATE attendees
+       SET checked_in = NOT checked_in,
+           checked_in_at = CASE WHEN NOT checked_in THEN NOW() ELSE NULL END
+       WHERE registration_id = $1
+       RETURNING checked_in`,
       [registrationId]
     );
-    if (current.rows.length === 0) {
+    if (result.rows.length === 0) {
       res.status(404).json({ error: "Registration not found" });
       return;
     }
 
-    const newState = !current.rows[0].checked_in;
-    await db.query(
-      "UPDATE attendees SET checked_in = $1, checked_in_at = $2 WHERE registration_id = $3",
-      [newState, newState ? new Date() : null, registrationId]
-    );
-
-    res.json({ checkedIn: newState });
+    res.json({ checkedIn: result.rows[0].checked_in as boolean });
   } catch (err) {
     logger.error({ err }, "Admin: check-in failed");
     res.status(500).json({ error: "Check-in failed" });
@@ -242,7 +242,7 @@ router.get("/admin/export", requireAdmin, async (req, res) => {
 router.get("/admin/attendees/:registrationId/qr", requireAdmin, async (req, res) => {
   const registrationId = String(req.params["registrationId"] ?? "");
 
-  if (!/^LBC-2026-[A-F0-9]{6}$/i.test(registrationId)) {
+  if (!REGISTRATION_ID_RE.test(registrationId)) {
     res.status(400).json({ error: "Invalid registration ID format" });
     return;
   }

@@ -1,5 +1,6 @@
 import express, { type Express, type Request } from "express";
 import cors from "cors";
+import helmet from "helmet";
 import pinoHttp from "pino-http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -8,6 +9,9 @@ import router from "./routes";
 import { logger } from "./lib/logger";
 
 const app: Express = express();
+
+// Security headers — X-Frame-Options, X-Content-Type-Options, HSTS, etc.
+app.use(helmet({ contentSecurityPolicy: false }));
 
 app.use(
   pinoHttp({

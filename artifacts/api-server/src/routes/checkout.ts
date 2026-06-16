@@ -9,6 +9,7 @@ import {
   createAttendeeRecord,
 } from "../lib/registration";
 import { sendConfirmationSMS } from "../lib/sms";
+import { EMAIL_RE, PHONE_RE, STRIPE_SESSION_RE } from "../lib/validators";
 
 const router = Router();
 
@@ -20,9 +21,6 @@ function getStripe(): Stripe | null {
 
 const SITE_URL =
   process.env["SITE_URL"] ?? "https://lbc-wealth-and-development-summit.onrender.com";
-
-const EMAIL_RE = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
-const PHONE_RE = /^\+?[\d\s\-().]{7,20}$/;
 const MAX_FIELD_LEN = 200;
 const MAX_LONG_FIELD_LEN = 500;
 
@@ -120,7 +118,7 @@ router.post("/checkout/session", async (req, res) => {
 
 router.get("/checkout/verify", async (req, res) => {
   const sessionId = String(req.query["session_id"] ?? "");
-  if (!sessionId || !/^cs_(test|live)_[a-zA-Z0-9]+$/.test(sessionId)) {
+  if (!sessionId || !STRIPE_SESSION_RE.test(sessionId)) {
     res.status(400).json({ error: "Invalid session ID" });
     return;
   }

@@ -1,4 +1,6 @@
 import { randomBytes } from "node:crypto";
+// Note: generatePaymentId() is intentionally separate from generateRegistrationId()
+// to prevent ID namespace collisions between attendee and payment records.
 import QRCode from "qrcode";
 import type { Pool } from "pg";
 
@@ -10,6 +12,11 @@ export function generateRegistrationId(): string {
 export function generateTicketNumber(): string {
   const rand = randomBytes(3).toString("hex").toUpperCase();
   return `TKT-${rand}`;
+}
+
+export function generatePaymentId(): string {
+  const rand = randomBytes(4).toString("hex").toUpperCase();
+  return `PAY-${rand}`;
 }
 
 export async function generateQRCode(registrationId: string): Promise<string> {
@@ -95,7 +102,7 @@ export async function createAttendeeRecord(pool: Pool, data: AttendeeData) {
   await pool.query(
     `INSERT INTO payments (payment_id, registration_id, stripe_session_id, amount, status)
      VALUES ($1, $2, $3, $4, 'paid')`,
-    [generateRegistrationId(), registrationId, data.stripeSessionId, data.amountPaid]
+    [generatePaymentId(), registrationId, data.stripeSessionId, data.amountPaid]
   );
 
   return { registration_id: registrationId, ticket_number: ticketNumber };
