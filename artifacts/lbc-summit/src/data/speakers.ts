@@ -40,6 +40,7 @@ export const speakers: Speaker[] = [
     sessionTitle: "From Income to Wealth: Building Assets That Work While You Sleep",
     transformationPromise: "Discover practical strategies for wealth accumulation and asset building.",
     bio: "Bio coming soon. This placeholder text will be updated once the speaker is finalized.",
+    photo: "/IMG_keynote2.jpeg",
   },
   {
     id: "featured-1",
