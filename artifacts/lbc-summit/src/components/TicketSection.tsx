@@ -101,14 +101,14 @@ export default function TicketSection({ onOpenModal }: TicketSectionProps) {
                   </button>
                 )}
                 {isGroup && (
-                  <button
-                    onClick={() => onOpenModal("general")}
-                    className="w-full border-2 border-gray-300 text-gray-700 hover:border-[#1a56db] hover:text-[#1a56db] font-bold py-3.5 rounded-xl transition-all"
+                  <a
+                    href="mailto:Support@lbcwealthanddevelopmentsummit.com?subject=Group%20Ticket%20Inquiry%20%E2%80%94%20LBC%20Wealth%20%26%20Development%20Summit%202026"
+                    className="w-full border-2 border-gray-300 text-gray-700 hover:border-[#1a56db] hover:text-[#1a56db] font-bold py-3.5 rounded-xl transition-all text-center block"
                     data-testid="button-ticket-group"
                     style={{ fontFamily: "var(--app-font-heading)" }}
                   >
                     Request Group Information
-                  </button>
+                  </a>
                 )}
               </div>
             );

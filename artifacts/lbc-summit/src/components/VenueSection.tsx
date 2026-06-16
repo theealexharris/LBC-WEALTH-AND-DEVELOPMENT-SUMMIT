@@ -3,10 +3,6 @@ import { MapPin, Car, Accessibility, Hotel, Plane } from "lucide-react";
 const HOTEL_ADDRESS = "5325 CA-1, Long Beach, CA 90804";
 const HOTEL_NAME = "Hotel Current";
 const HOTEL_PHONE = "(562) 597-1341";
-const MAPS_EMBED_URL =
-  "https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=Hotel+Current+5325+Pacific+Coast+Hwy+Long+Beach+CA+90804";
-const MAPS_LINK = "https://maps.google.com/?q=Hotel+Current+5325+CA-1+Long+Beach+CA+90804";
-const DIRECTIONS_LINK = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(HOTEL_ADDRESS)}`;
 
 const details = [
   {
@@ -60,7 +56,7 @@ export default function VenueSection() {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {details.map(({ icon: Icon, title, content, note }) => (
             <div
               key={title}
@@ -79,48 +75,6 @@ export default function VenueSection() {
               <p className="text-gray-400 text-xs leading-relaxed">{note}</p>
             </div>
           ))}
-        </div>
-
-        <div className="rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-sm h-80">
-          <iframe
-            title="Hotel Current Map"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            src={MAPS_EMBED_URL}
-          />
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href={MAPS_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-gray-300 text-gray-700 hover:border-[#1a56db] hover:text-[#1a56db] px-6 py-3 rounded-xl text-sm font-semibold transition-colors text-center"
-            data-testid="button-view-map"
-          >
-            View Map
-          </a>
-          <a
-            href={DIRECTIONS_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-gray-300 text-gray-700 hover:border-[#1a56db] hover:text-[#1a56db] px-6 py-3 rounded-xl text-sm font-semibold transition-colors text-center"
-            data-testid="button-get-directions"
-          >
-            Get Directions
-          </a>
-          <a
-            href="https://www.marriott.com/en-us/hotels/lgbac-hotel-current/overview/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-gray-300 text-gray-700 hover:border-[#1a56db] hover:text-[#1a56db] px-6 py-3 rounded-xl text-sm font-semibold transition-colors text-center"
-            data-testid="button-accommodations"
-          >
-            Explore Accommodations
-          </a>
         </div>
       </div>
     </section>
