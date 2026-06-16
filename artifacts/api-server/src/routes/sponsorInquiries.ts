@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { logger } from "../lib/logger";
 import { getPool } from "../lib/db";
+import { sendSponsorInquiryEmail } from "../lib/email";
 
 const router = Router();
 
@@ -35,6 +36,10 @@ router.post("/sponsor-inquiries", async (req, res) => {
     );
 
     logger.info({ interest }, "Sponsor inquiry saved");
+
+    sendSponsorInquiryEmail({ name, organization, email, phone: phone || null, interest, message: message || null })
+      .catch((err) => logger.error({ err }, "Failed to send sponsor inquiry notification email"));
+
     res.status(201).json({ success: true, message: "Inquiry received successfully" });
   } catch (err) {
     logger.error({ err }, "Error saving sponsor inquiry");

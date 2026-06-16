@@ -2,7 +2,7 @@ export const tickets = [
   {
     id: "general",
     name: "General Admission",
-    price: "To Be Confirmed",
+    price: "$25",
     inclusions: [
       "Access to all 2 days",
       "All 7 speaker sessions",
@@ -15,7 +15,7 @@ export const tickets = [
   {
     id: "vip",
     name: "VIP Admission",
-    price: "To Be Confirmed",
+    price: "$97",
     inclusions: [
       "All General Admission inclusions",
       "2 private VIP sessions",

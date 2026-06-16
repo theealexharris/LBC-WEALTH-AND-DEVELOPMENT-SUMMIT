@@ -61,11 +61,6 @@ export default function TicketSection({ onOpenModal }: TicketSectionProps) {
                   <div className={`text-3xl font-extrabold ${isVip ? "text-white" : "text-[#1a56db]"}`} style={{ fontFamily: "var(--app-font-heading)" }}>
                     {ticket.price}
                   </div>
-                  {!isGroup && (
-                    <p className={`text-xs mt-1 ${isVip ? "text-gray-400" : "text-gray-500"}`}>
-                      Price to be confirmed prior to launch
-                    </p>
-                  )}
                   {isGroup && (
                     <p className="text-xs text-gray-500 mt-1">Contact us for group pricing</p>
                   )}
@@ -122,10 +117,12 @@ export default function TicketSection({ onOpenModal }: TicketSectionProps) {
 
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 text-center max-w-2xl mx-auto">
           <p className="text-amber-800 text-sm leading-relaxed">
-            <strong>Transparency Note:</strong> Ticket prices, benefits, refund
-            terms, and availability will be confirmed and published before any
-            payment is processed. No financial transaction occurs through this
-            prototype.
+            <strong>Young Adult Discount:</strong> Ages 17–20 pay $15 — must pay at event registration.
+            Contact us at{" "}
+            <a href="mailto:Support@lbcwealthanddevelopmentsummit.com" className="underline font-semibold">
+              Support@lbcwealthanddevelopmentsummit.com
+            </a>{" "}
+            for group inquiries.
           </p>
         </div>
       </div>

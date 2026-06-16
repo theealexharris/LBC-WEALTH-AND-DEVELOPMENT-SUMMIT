@@ -1,17 +1,25 @@
 import { MapPin, Car, Accessibility, Hotel, Plane } from "lucide-react";
 
+const HOTEL_ADDRESS = "5325 CA-1, Long Beach, CA 90804";
+const HOTEL_NAME = "Hotel Current";
+const HOTEL_PHONE = "(562) 597-1341";
+const MAPS_EMBED_URL =
+  "https://www.google.com/maps/embed/v1/place?key=AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY&q=Hotel+Current+5325+Pacific+Coast+Hwy+Long+Beach+CA+90804";
+const MAPS_LINK = "https://maps.google.com/?q=Hotel+Current+5325+CA-1+Long+Beach+CA+90804";
+const DIRECTIONS_LINK = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(HOTEL_ADDRESS)}`;
+
 const details = [
   {
     icon: MapPin,
     title: "Venue",
-    content: "To Be Confirmed — Long Beach, California",
-    note: "Full address and venue details will be shared with registered attendees.",
+    content: `${HOTEL_NAME} — ${HOTEL_ADDRESS}`,
+    note: `Phone: ${HOTEL_PHONE}`,
   },
   {
     icon: Car,
     title: "Parking",
-    content: "To Be Confirmed",
-    note: "Parking options and any associated costs will be communicated prior to the event.",
+    content: "On-site parking available",
+    note: "Hotel Current offers parking for guests and event attendees.",
   },
   {
     icon: Accessibility,
@@ -22,14 +30,14 @@ const details = [
   {
     icon: Hotel,
     title: "Recommended Hotel",
-    content: "To Be Confirmed",
-    note: "Discounted room blocks may be available for registered attendees.",
+    content: HOTEL_NAME,
+    note: "Stay on-site at the event venue. Contact the hotel directly to book your room.",
   },
   {
     icon: Plane,
     title: "Nearest Airport",
     content: "Long Beach Airport (LGB) — also served by LAX & BUR",
-    note: "Detailed travel information will be provided once the venue is confirmed.",
+    note: "Long Beach Airport is approximately 10 minutes from the venue.",
   },
 ];
 
@@ -48,7 +56,7 @@ export default function VenueSection() {
             Summit Location
           </h2>
           <p className="text-gray-600 text-lg">
-            Long Beach, California — Venue details to be confirmed
+            {HOTEL_NAME} — {HOTEL_ADDRESS}
           </p>
         </div>
 
@@ -73,34 +81,47 @@ export default function VenueSection() {
           ))}
         </div>
 
-        <div className="bg-gray-100 rounded-2xl h-64 flex items-center justify-center mb-8 border border-dashed border-gray-300">
-          <div className="text-center">
-            <MapPin size={32} className="text-gray-400 mx-auto mb-2" />
-            <p className="text-gray-500 font-medium">Interactive Map — Coming Soon</p>
-            <p className="text-gray-400 text-sm">Map will be embedded once venue is confirmed</p>
-          </div>
+        <div className="rounded-2xl overflow-hidden mb-8 border border-gray-200 shadow-sm h-80">
+          <iframe
+            title="Hotel Current Map"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            src={MAPS_EMBED_URL}
+          />
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          {[
-            { label: "View Map (Coming Soon)", testId: "button-view-map" },
-            { label: "Get Directions (Coming Soon)", testId: "button-get-directions" },
-            { label: "Explore Accommodations (Coming Soon)", testId: "button-accommodations" },
-          ].map(({ label, testId }) => (
-            <button
-              key={label}
-              className="border border-gray-300 text-gray-600 hover:border-[#1a56db] hover:text-[#1a56db] px-6 py-3 rounded-xl text-sm font-semibold transition-colors"
-              data-testid={testId}
-              disabled
-            >
-              {label}
-            </button>
-          ))}
+          <a
+            href={MAPS_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border border-gray-300 text-gray-700 hover:border-[#1a56db] hover:text-[#1a56db] px-6 py-3 rounded-xl text-sm font-semibold transition-colors text-center"
+            data-testid="button-view-map"
+          >
+            View Map
+          </a>
+          <a
+            href={DIRECTIONS_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border border-gray-300 text-gray-700 hover:border-[#1a56db] hover:text-[#1a56db] px-6 py-3 rounded-xl text-sm font-semibold transition-colors text-center"
+            data-testid="button-get-directions"
+          >
+            Get Directions
+          </a>
+          <a
+            href="https://www.marriott.com/en-us/hotels/lgbac-hotel-current/overview/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="border border-gray-300 text-gray-700 hover:border-[#1a56db] hover:text-[#1a56db] px-6 py-3 rounded-xl text-sm font-semibold transition-colors text-center"
+            data-testid="button-accommodations"
+          >
+            Explore Accommodations
+          </a>
         </div>
-
-        <p className="text-center text-gray-400 text-xs mt-6 italic">
-          Venue and logistics details will be confirmed and updated prior to the event launch.
-        </p>
       </div>
     </section>
   );
