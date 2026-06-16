@@ -1,4 +1,4 @@
-import express, { type Express } from "express";
+import express, { type Express, type Request } from "express";
 import cors from "cors";
 import pinoHttp from "pino-http";
 import path from "node:path";
@@ -28,8 +28,24 @@ app.use(
     },
   }),
 );
-app.use(cors());
-app.use(express.json());
+
+const allowedOrigin = process.env["FRONTEND_URL"] ?? "https://lbc-wealth-and-development-summit.onrender.com";
+app.use(
+  cors({
+    origin: process.env["NODE_ENV"] === "production" ? allowedOrigin : true,
+    methods: ["GET", "POST", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+
+// Parse JSON — save raw body so the Stripe webhook handler can verify signatures
+app.use(
+  express.json({
+    verify: (_req: Request, _res, buf) => {
+      (_req as Request & { rawBody?: Buffer }).rawBody = buf;
+    },
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", router);
@@ -41,7 +57,7 @@ const staticDir = path.resolve(__dirname, "../../lbc-summit/dist/public");
 if (existsSync(staticDir)) {
   app.use(express.static(staticDir));
   // SPA fallback — serve index.html for any non-API route
-  app.get("*", (_req, res) => {
+  app.get("/{*splat}", (_req, res) => {
     res.sendFile(path.join(staticDir, "index.html"));
   });
 }

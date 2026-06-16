@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Switch, Route, useLocation } from "wouter";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import CredibilityStrip from "@/components/CredibilityStrip";
@@ -17,23 +17,17 @@ import SponsorSection from "@/components/SponsorSection";
 import FAQSection from "@/components/FAQSection";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
-import RegistrationModal from "@/components/RegistrationModal";
+import RegisterPage from "@/pages/RegisterPage";
+import SuccessPage from "@/pages/SuccessPage";
+import AdminPage from "@/pages/AdminPage";
 
-export default function App() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalTicketType, setModalTicketType] = useState<"general" | "vip">("general");
-
-  const openModal = (type: "general" | "vip") => {
-    setModalTicketType(type);
-    setModalOpen(true);
-  };
-
-  const closeModal = () => setModalOpen(false);
+function LandingPage() {
+  const [, navigate] = useLocation();
+  const openModal = (_type: "general" | "vip") => navigate("/register");
 
   return (
     <>
       <Header onOpenModal={openModal} />
-
       <main>
         <Hero onOpenModal={openModal} />
         <CredibilityStrip />
@@ -52,14 +46,18 @@ export default function App() {
         <FAQSection />
         <FinalCTA onOpenModal={openModal} />
       </main>
-
       <Footer />
-
-      <RegistrationModal
-        open={modalOpen}
-        ticketType={modalTicketType}
-        onClose={closeModal}
-      />
     </>
+  );
+}
+
+export default function App() {
+  return (
+    <Switch>
+      <Route path="/register/success" component={SuccessPage} />
+      <Route path="/register" component={RegisterPage} />
+      <Route path="/admin" component={AdminPage} />
+      <Route component={LandingPage} />
+    </Switch>
   );
 }
