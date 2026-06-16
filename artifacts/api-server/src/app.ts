@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { existsSync } from "node:fs";
 import router from "./routes";
+import webhooksRouter from "./routes/webhooks";
 import { logger } from "./lib/logger";
 
 const app: Express = express();
@@ -36,6 +37,9 @@ app.use(
     allowedHeaders: ["Content-Type"],
   }),
 );
+// Stripe webhook needs raw body — mount before JSON middleware
+app.use("/api", express.raw({ type: "application/json" }), webhooksRouter);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

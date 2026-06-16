@@ -12,6 +12,7 @@ const navLinks = [
   { label: "FAQ", href: "#faq" },
 ];
 
+
 interface HeaderProps {
   onOpenModal: (type: "general" | "vip") => void;
 }
@@ -67,6 +68,13 @@ export default function Header({ onOpenModal }: HeaderProps) {
                 {link.label}
               </button>
             ))}
+            <a
+              href="/register"
+              className="text-[#c79d35] hover:text-white text-sm font-semibold transition-colors border border-[#c79d35]/40 hover:border-[#c79d35] px-4 py-2 rounded-lg"
+              data-testid="nav-register"
+            >
+              Register
+            </a>
             <button
               onClick={() => onOpenModal("general")}
               className="bg-[#1a56db] hover:bg-[#1e3a8a] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors shadow-lg"
@@ -100,7 +108,15 @@ export default function Header({ onOpenModal }: HeaderProps) {
               {link.label}
             </button>
           ))}
-          <div className="pt-4">
+          <div className="pt-4 flex flex-col gap-2">
+            <a
+              href="/register"
+              className="w-full border border-[#c79d35]/60 text-[#c79d35] font-semibold py-3 rounded-lg text-center transition-colors hover:bg-[#c79d35]/10"
+              onClick={() => setMobileOpen(false)}
+              data-testid="nav-register-mobile"
+            >
+              Register Now
+            </a>
             <button
               onClick={() => { onOpenModal("general"); setMobileOpen(false); }}
               className="w-full bg-[#1a56db] hover:bg-[#1e3a8a] text-white font-semibold py-3 rounded-lg transition-colors"
