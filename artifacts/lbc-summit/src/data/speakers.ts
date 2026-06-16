@@ -5,6 +5,7 @@ export type Speaker = {
   company: string;
   isKeynote: boolean;
   duration: string;
+  dayLabel?: string;
   category: string;
   sessionTitle: string;
   transformationPromise: string;
@@ -20,6 +21,7 @@ export const speakers: Speaker[] = [
     company: "Redefined Mindset",
     isKeynote: true,
     duration: "60 Minutes",
+    dayLabel: "Day 1 Keynote Speaker",
     category: "Mindset, Identity & Transformational Leadership",
     sessionTitle: "Redefining Mindset: You Are Not Your Past",
     transformationPromise: "Learn to overcome limiting beliefs and unlock your true potential.",
@@ -33,6 +35,7 @@ export const speakers: Speaker[] = [
     company: "Placeholder Co",
     isKeynote: true,
     duration: "60 Minutes",
+    dayLabel: "Day 2 Keynote Speaker",
     category: "Wealth Development, Entrepreneurship & Implementation",
     sessionTitle: "From Income to Wealth: Building Assets That Work While You Sleep",
     transformationPromise: "Discover practical strategies for wealth accumulation and asset building.",

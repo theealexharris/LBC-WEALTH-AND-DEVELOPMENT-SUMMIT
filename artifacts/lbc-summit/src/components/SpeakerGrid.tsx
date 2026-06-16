@@ -47,7 +47,7 @@ function SpeakerCard({
       {speaker.isKeynote && (
         <div className="flex justify-center mb-3">
           <span className="bg-[#1a56db] text-white text-xs font-bold px-4 py-1 rounded-full tracking-wide uppercase">
-            Day 1 Keynote Speaker
+            {speaker.dayLabel ?? "Keynote Speaker"}
           </span>
         </div>
       )}
