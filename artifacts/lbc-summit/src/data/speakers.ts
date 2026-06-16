@@ -30,7 +30,7 @@ export const speakers: Speaker[] = [
   },
   {
     id: "keynote-2",
-    name: "Keynote Speaker 2",
+    name: 'Coach Demetrus "Flip" Daniel',
     title: "To Be Announced",
     company: "Placeholder Co",
     isKeynote: true,
