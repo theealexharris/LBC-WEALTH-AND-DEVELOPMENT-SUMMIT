@@ -9,20 +9,22 @@ export type Speaker = {
   sessionTitle: string;
   transformationPromise: string;
   bio: string;
+  photo?: string;
 };
 
 export const speakers: Speaker[] = [
   {
     id: "keynote-1",
-    name: "Keynote Speaker 1",
-    title: "To Be Announced",
-    company: "Placeholder Co",
+    name: "Pastor Ruben Palomares",
+    title: "Author | Speaker | Redemption Story",
+    company: "Redefined Mindset",
     isKeynote: true,
     duration: "60 Minutes",
     category: "Mindset, Identity & Transformational Leadership",
-    sessionTitle: "Breaking the Mental Barriers That Define Your Ceiling",
+    sessionTitle: "Redefining Mindset: You Are Not Your Past",
     transformationPromise: "Learn to overcome limiting beliefs and unlock your true potential.",
-    bio: "Bio coming soon. This placeholder text will be updated once the speaker is finalized.",
+    bio: "Pastor Ruben Palomares is the author of 'Redemption of a L.A.P.D. Rogue Cop' — a powerful story of transformation, redemption, and rebuilding identity after adversity. His message challenges audiences to stop being defined by their past and start building the future they deserve.",
+    photo: "/speakers/ruben-palomares.jpg",
   },
   {
     id: "keynote-2",

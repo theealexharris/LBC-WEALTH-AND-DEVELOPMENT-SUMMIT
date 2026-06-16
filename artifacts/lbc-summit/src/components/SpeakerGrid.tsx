@@ -2,7 +2,16 @@ import { useState } from "react";
 import { speakers, type Speaker } from "@/data/speakers";
 import SpeakerModal from "@/components/SpeakerModal";
 
-function InitialsAvatar({ name }: { name: string }) {
+function SpeakerAvatar({ name, photo }: { name: string; photo?: string }) {
+  if (photo) {
+    return (
+      <img
+        src={photo}
+        alt={name}
+        className="w-24 h-24 rounded-full object-cover object-top mx-auto mb-5 border-2 border-[#1a56db]/20 shadow-md"
+      />
+    );
+  }
   const initials = name
     .split(" ")
     .map((n) => n[0])
@@ -48,7 +57,7 @@ function SpeakerCard({
         </div>
       )}
 
-      <InitialsAvatar name={speaker.name} />
+      <SpeakerAvatar name={speaker.name} photo={speaker.photo} />
 
       <h3
         className="text-lg font-extrabold text-[#0f1729] mb-1"
