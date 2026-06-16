@@ -1,22 +1,19 @@
 import { Router, type Request, type Response, type NextFunction } from "express";
 import { timingSafeEqual, createHash } from "node:crypto";
 import jwt from "jsonwebtoken";
-import { Pool } from "pg";
 import { logger } from "../lib/logger";
+import { getPool } from "../lib/db";
 
 const router = Router();
 
-let pool: Pool | null = null;
-function getPool(): Pool | null {
-  if (!process.env["DATABASE_URL"]) return null;
-  if (!pool) pool = new Pool({ connectionString: process.env["DATABASE_URL"], ssl: true });
-  return pool;
-}
-
+// ── JWT ───────────────────────────────────────────────────────────────────────
 function getJwtSecret(): string {
-  return process.env["JWT_SECRET"] ?? "lbc-summit-jwt-secret-change-in-production";
+  const secret = process.env["JWT_SECRET"];
+  if (!secret) throw new Error("JWT_SECRET environment variable is required");
+  return secret;
 }
 
+// ── Auth middleware ───────────────────────────────────────────────────────────
 function requireAdmin(req: Request, res: Response, next: NextFunction): void {
   const auth = req.headers["authorization"] ?? "";
   const token = auth.startsWith("Bearer ") ? auth.slice(7) : "";
@@ -32,7 +29,41 @@ function requireAdmin(req: Request, res: Response, next: NextFunction): void {
   }
 }
 
+// ── Simple in-memory rate limiter for login (5 attempts / 15 min per IP) ──────
+const loginAttempts = new Map<string, { count: number; resetAt: number }>();
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const WINDOW = 15 * 60 * 1000; // 15 minutes
+  const entry = loginAttempts.get(ip);
+  if (!entry || entry.resetAt < now) {
+    loginAttempts.set(ip, { count: 1, resetAt: now + WINDOW });
+    return true;
+  }
+  if (entry.count >= 5) return false;
+  entry.count++;
+  return true;
+}
+
+// ── Escape CSV cells to prevent formula injection ─────────────────────────────
+function escapeCSVCell(value: string): string {
+  // Prevent spreadsheet formula injection (Excel / Google Sheets)
+  if (/^[=+\-@\t\r]/.test(value)) return `'${value}`;
+  return value;
+}
+
+// ── Routes ───────────────────────────────────────────────────────────────────
 router.post("/admin/login", (req, res) => {
+  const ip = (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim()
+    ?? req.socket.remoteAddress
+    ?? "unknown";
+
+  if (!checkRateLimit(ip)) {
+    logger.warn({ ip }, "Admin login rate limit exceeded");
+    res.status(429).json({ error: "Too many login attempts. Please wait 15 minutes." });
+    return;
+  }
+
   const { password } = req.body as { password?: string };
   const adminPassword = process.env["ADMIN_PASSWORD"];
 
@@ -50,7 +81,7 @@ router.post("/admin/login", (req, res) => {
   const expected = createHash("sha256").update(adminPassword).digest();
 
   if (provided.length !== expected.length || !timingSafeEqual(provided, expected)) {
-    logger.warn("Failed admin login attempt");
+    logger.warn({ ip }, "Failed admin login attempt");
     res.status(401).json({ error: "Incorrect password" });
     return;
   }
@@ -101,10 +132,12 @@ router.get("/admin/registrations", requireAdmin, async (req, res) => {
       params = [limit, offset];
     }
 
-    const result = await db.query(query, params);
-    const countResult = await db.query("SELECT COUNT(*) FROM attendees");
-    const total = parseInt(countResult.rows[0].count, 10);
+    const [result, countResult] = await Promise.all([
+      db.query(query, params),
+      db.query("SELECT COUNT(*) AS total FROM attendees"),
+    ]);
 
+    const total = parseInt(String(countResult.rows[0]?.total ?? "0"), 10);
     res.json({ registrations: result.rows, total, page, limit });
   } catch (err) {
     logger.error({ err }, "Admin: failed to fetch registrations");
@@ -114,6 +147,13 @@ router.get("/admin/registrations", requireAdmin, async (req, res) => {
 
 router.patch("/admin/attendees/:registrationId/checkin", requireAdmin, async (req, res) => {
   const { registrationId } = req.params;
+
+  // Validate registration ID format
+  if (!/^LBC-2026-[A-F0-9]{6}$/i.test(registrationId)) {
+    res.status(400).json({ error: "Invalid registration ID format" });
+    return;
+  }
+
   const db = getPool();
   if (!db) {
     res.status(503).json({ error: "Database not configured" });
@@ -143,14 +183,8 @@ router.patch("/admin/attendees/:registrationId/checkin", requireAdmin, async (re
   }
 });
 
-router.get("/admin/export", (req, res, next) => {
-  // Allow token via query param for direct browser download
-  const queryToken = String(req.query["token"] ?? "");
-  if (queryToken && !req.headers["authorization"]) {
-    req.headers["authorization"] = `Bearer ${queryToken}`;
-  }
-  next();
-}, requireAdmin, async (req, res) => {
+// CSV export — Authorization header only (no query-param token)
+router.get("/admin/export", requireAdmin, async (req, res) => {
   const db = getPool();
   if (!db) {
     res.status(503).json({ error: "Database not configured" });
@@ -185,10 +219,14 @@ router.get("/admin/export", (req, res, next) => {
     ]);
 
     const csv = [headers, ...rows]
-      .map((row) => row.map((v) => `"${String(v).replace(/"/g, '""')}"`).join(","))
+      .map((row) =>
+        row
+          .map((v) => `"${escapeCSVCell(String(v)).replace(/"/g, '""')}"`)
+          .join(",")
+      )
       .join("\n");
 
-    res.setHeader("Content-Type", "text/csv");
+    res.setHeader("Content-Type", "text/csv; charset=utf-8");
     res.setHeader(
       "Content-Disposition",
       `attachment; filename="lbc-summit-registrations-${Date.now()}.csv"`
@@ -202,6 +240,12 @@ router.get("/admin/export", (req, res, next) => {
 
 router.get("/admin/attendees/:registrationId/qr", requireAdmin, async (req, res) => {
   const { registrationId } = req.params;
+
+  if (!/^LBC-2026-[A-F0-9]{6}$/i.test(registrationId)) {
+    res.status(400).json({ error: "Invalid registration ID format" });
+    return;
+  }
+
   const db = getPool();
   if (!db) {
     res.status(503).json({ error: "Database not configured" });

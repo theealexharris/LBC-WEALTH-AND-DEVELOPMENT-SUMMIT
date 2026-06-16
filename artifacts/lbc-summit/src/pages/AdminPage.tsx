@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Search, LogOut, Download, QrCode, CheckCircle2, Circle, Loader2, Shield } from "lucide-react";
+import { Search, LogOut, Download, CheckCircle2, Circle, Loader2, Shield } from "lucide-react";
 import summitLogo from "@assets/LBC_Summit_pic_1781402272251.png";
 
 interface Attendee {
@@ -101,13 +101,17 @@ export default function AdminPage() {
     }
   };
 
+  const [checkInError, setCheckInError] = useState<string | null>(null);
+
   const toggleCheckIn = async (registrationId: string) => {
     if (!state.token) return;
+    setCheckInError(null);
     try {
       const res = await fetch(`/api/admin/attendees/${encodeURIComponent(registrationId)}/checkin`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${state.token}` },
       });
+      if (!res.ok) throw new Error("Check-in update failed");
       const data = await res.json() as { checkedIn: boolean };
       setState((s) => ({
         ...s,
@@ -117,12 +121,33 @@ export default function AdminPage() {
             : r
         ),
       }));
-    } catch {}
+    } catch (err) {
+      setCheckInError(err instanceof Error ? err.message : "Check-in update failed");
+    }
   };
 
-  const handleExport = () => {
+  const [exportError, setExportError] = useState<string | null>(null);
+
+  const handleExport = async () => {
     if (!state.token) return;
-    window.open(`/api/admin/export?token=${encodeURIComponent(state.token)}`, "_blank");
+    setExportError(null);
+    try {
+      const res = await fetch("/api/admin/export", {
+        headers: { Authorization: `Bearer ${state.token}` },
+      });
+      if (!res.ok) throw new Error("Export failed");
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `lbc-summit-registrations-${Date.now()}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch {
+      setExportError("Export failed. Please try again.");
+    }
   };
 
   // Login screen
@@ -226,10 +251,10 @@ export default function AdminPage() {
           </div>
         </div>
 
-        {/* Error */}
-        {state.error && (
+        {/* Errors */}
+        {(state.error || exportError || checkInError) && (
           <div className="bg-red-900/20 border border-red-500/40 rounded-xl p-4 mb-4 text-red-300 text-sm">
-            {state.error}
+            {state.error ?? exportError ?? checkInError}
           </div>
         )}
 

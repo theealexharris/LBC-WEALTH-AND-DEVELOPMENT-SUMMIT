@@ -1,18 +1,6 @@
 import { Router } from "express";
-import { Pool } from "pg";
 import { logger } from "../lib/logger";
-
-const router = Router();
-
-let pool: Pool | null = null;
-
-function getPool(): Pool | null {
-  if (!process.env["DATABASE_URL"]) return null;
-  if (!pool) {
-    pool = new Pool({ connectionString: process.env["DATABASE_URL"], ssl: true });
-  }
-  return pool;
-}
+import { getPool } from "../lib/db";
 
 const EMAIL_RE = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
 
