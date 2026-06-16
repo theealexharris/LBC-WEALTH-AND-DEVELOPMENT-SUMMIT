@@ -238,9 +238,16 @@ export default function RegisterPage() {
                     <p className={`text-lg font-extrabold mb-1 ${t.featured ? "text-[#c79d35]" : "text-white"}`} style={{ fontFamily: "var(--app-font-heading)" }}>
                       {t.name}
                     </p>
-                    <p className={`text-3xl font-extrabold mb-3 ${t.featured ? "text-white" : "text-[#1a56db]"}`} style={{ fontFamily: "var(--app-font-heading)" }}>
+                    <p className={`text-3xl font-extrabold ${t.featured ? "text-white" : "text-[#1a56db]"}`} style={{ fontFamily: "var(--app-font-heading)" }}>
                       {t.price}
                     </p>
+                    {t.id === "general" && (
+                      <p className="text-[#c79d35] text-xs font-semibold mt-1 mb-3 leading-snug">
+                        $15 — Young Adult (17–20 y/o)<br />
+                        <span className="text-gray-400 font-normal">Must pay at event registration</span>
+                      </p>
+                    )}
+                    {t.id !== "general" && <div className="mb-3" />}
                     <p className="text-gray-400 text-xs leading-relaxed mb-4 flex-1">{t.description}</p>
                     <ul className="space-y-1.5">
                       {t.inclusions.slice(0, 4).map((inc) => (
