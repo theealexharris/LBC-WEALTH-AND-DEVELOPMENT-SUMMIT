@@ -24,7 +24,7 @@ export const speakers: Speaker[] = [
     sessionTitle: "Redefining Mindset: You Are Not Your Past",
     transformationPromise: "Learn to overcome limiting beliefs and unlock your true potential.",
     bio: "Pastor Ruben Palomares is the author of 'Redemption of a L.A.P.D. Rogue Cop' — a powerful story of transformation, redemption, and rebuilding identity after adversity. His message challenges audiences to stop being defined by their past and start building the future they deserve.",
-    photo: "/speakers/ruben-palomares.jpg",
+    photo: "/IMG_2453.jpeg",
   },
   {
     id: "keynote-2",

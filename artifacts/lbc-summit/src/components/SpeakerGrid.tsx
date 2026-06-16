@@ -2,14 +2,16 @@ import { useState } from "react";
 import { speakers, type Speaker } from "@/data/speakers";
 import SpeakerModal from "@/components/SpeakerModal";
 
-function SpeakerAvatar({ name, photo }: { name: string; photo?: string }) {
+function SpeakerAvatar({ name, photo, isKeynote }: { name: string; photo?: string; isKeynote?: boolean }) {
   if (photo) {
     return (
-      <img
-        src={photo}
-        alt={name}
-        className="w-24 h-24 rounded-full object-cover object-top mx-auto mb-5 border-2 border-[#1a56db]/20 shadow-md"
-      />
+      <div className={`mx-auto mb-5 overflow-hidden rounded-2xl border border-[#1a56db]/20 shadow-md ${isKeynote ? "w-full h-56" : "w-full h-44"}`}>
+        <img
+          src={photo}
+          alt={name}
+          className="w-full h-full object-cover object-center"
+        />
+      </div>
     );
   }
   const initials = name
@@ -57,7 +59,7 @@ function SpeakerCard({
         </div>
       )}
 
-      <SpeakerAvatar name={speaker.name} photo={speaker.photo} />
+      <SpeakerAvatar name={speaker.name} photo={speaker.photo} isKeynote={speaker.isKeynote} />
 
       <h3
         className="text-lg font-extrabold text-[#0f1729] mb-1"
