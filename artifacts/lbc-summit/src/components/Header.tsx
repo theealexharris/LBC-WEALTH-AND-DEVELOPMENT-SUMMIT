@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Mail } from "lucide-react";
 import summitLogo from "@assets/LBC_Summit_pic_1781402272251.png";
+
+const SUPPORT_EMAIL = "Support@LBCwealthanddevelopmentsummit.com";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -69,11 +71,12 @@ export default function Header({ onOpenModal }: HeaderProps) {
               </button>
             ))}
             <a
-              href="/register"
-              className="text-[#c79d35] hover:text-white text-sm font-semibold transition-colors border border-[#c79d35]/40 hover:border-[#c79d35] px-4 py-2 rounded-lg"
-              data-testid="nav-register"
+              href={`mailto:${SUPPORT_EMAIL}?subject=Summit%20Inquiry`}
+              className="flex items-center gap-1.5 text-gray-300 hover:text-white text-sm font-medium transition-colors"
+              data-testid="nav-contact-support"
             >
-              Register
+              <Mail size={14} />
+              Contact Support
             </a>
             <button
               onClick={() => onOpenModal("general")}
@@ -110,12 +113,13 @@ export default function Header({ onOpenModal }: HeaderProps) {
           ))}
           <div className="pt-4 flex flex-col gap-2">
             <a
-              href="/register"
-              className="w-full border border-[#c79d35]/60 text-[#c79d35] font-semibold py-3 rounded-lg text-center transition-colors hover:bg-[#c79d35]/10"
+              href={`mailto:${SUPPORT_EMAIL}?subject=Summit%20Inquiry`}
+              className="w-full border border-white/20 text-gray-300 font-semibold py-3 rounded-lg text-center transition-colors hover:bg-white/5 flex items-center justify-center gap-2"
               onClick={() => setMobileOpen(false)}
-              data-testid="nav-register-mobile"
+              data-testid="nav-contact-support-mobile"
             >
-              Register Now
+              <Mail size={16} />
+              Contact Support
             </a>
             <button
               onClick={() => { onOpenModal("general"); setMobileOpen(false); }}
