@@ -53,7 +53,7 @@ export default function FinalCTA({ onOpenModal }: FinalCTAProps) {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-gray-400 text-sm">
           <span className="flex items-center gap-2">
             <Calendar size={16} className="text-[#c79d35]" />
-            Event Date: To Be Confirmed — 2026
+            Event Date: 8/15/26 – 8/16/26
           </span>
           <span className="flex items-center gap-2">
             <MapPin size={16} className="text-[#c79d35]" />
@@ -62,7 +62,7 @@ export default function FinalCTA({ onOpenModal }: FinalCTAProps) {
         </div>
 
         <p className="text-gray-600 text-xs mt-6">
-          Presented by Redefined Mindset &nbsp;·&nbsp; info@redefinedmindset.com
+          Presented by Redefined Mindset
         </p>
       </div>
     </section>
