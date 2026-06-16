@@ -10,7 +10,6 @@ import ExperienceSection from "@/components/ExperienceSection";
 import AgendaTabs from "@/components/AgendaTabs";
 import VIPSection from "@/components/VIPSection";
 import OutcomesSection from "@/components/OutcomesSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import TicketSection from "@/components/TicketSection";
 import VenueSection from "@/components/VenueSection";
 import SponsorSection from "@/components/SponsorSection";
@@ -39,7 +38,6 @@ function LandingPage() {
         <AgendaTabs />
         <VIPSection onOpenModal={openModal} />
         <OutcomesSection onOpenModal={openModal} />
-        <TestimonialsSection />
         <TicketSection onOpenModal={openModal} />
         <VenueSection />
         <SponsorSection />

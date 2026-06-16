@@ -20,8 +20,8 @@ export default function FAQSection() {
           </h2>
           <p className="text-gray-500 text-base">
             Don't see your question? Contact us at{" "}
-            <a href="mailto:info@redefinedmindset.com" className="text-[#1a56db] hover:underline">
-              info@redefinedmindset.com
+            <a href="mailto:Support@lbcwealthanddevelopmentsummit.com" className="text-[#1a56db] hover:underline">
+              Support@lbcwealthanddevelopmentsummit.com
             </a>
           </p>
         </div>
