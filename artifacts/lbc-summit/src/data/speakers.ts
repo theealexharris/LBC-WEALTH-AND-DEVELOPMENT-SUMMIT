@@ -31,16 +31,16 @@ export const speakers: Speaker[] = [
   {
     id: "keynote-2",
     name: 'Coach Demetrus "Flip" Daniel',
-    title: "To Be Announced",
+    title: "Peer Coach | Speaker | Redemption Story",
     company: "Placeholder Co",
     isKeynote: true,
     duration: "60 Minutes",
     dayLabel: "Day 2 Keynote Speaker",
-    category: "Wealth Development, Entrepreneurship & Implementation",
-    sessionTitle: "From Income to Wealth: Building Assets That Work While You Sleep",
+    category: "Wealth Development, & Mindset Implementation",
+    sessionTitle: "From Survival To Strategy: Breaking The Survival Mindset",
     transformationPromise: "Discover practical strategies for wealth accumulation and asset building.",
     bio: "Bio coming soon. This placeholder text will be updated once the speaker is finalized.",
-    photo: "/IMG_keynote2.jpeg",
+    photo: "/Flip and snoop.png",
   },
   {
     id: "featured-1",
@@ -53,6 +53,7 @@ export const speakers: Speaker[] = [
     sessionTitle: "Reclaiming Your Story: Identity After Adversity",
     transformationPromise: "Rebuild your sense of self and harness past challenges as strengths.",
     bio: "Bio coming soon.",
+    photo: "/Alex.jpeg",
   },
   {
     id: "featured-2",
@@ -65,6 +66,7 @@ export const speakers: Speaker[] = [
     sessionTitle: "The Fundamentals of Financial Intelligence",
     transformationPromise: "Master the core principles of money management and strategic investing.",
     bio: "Bio coming soon.",
+    photo: "/Dr. Vicki.jpeg",
   },
   {
     id: "featured-3",
@@ -77,6 +79,7 @@ export const speakers: Speaker[] = [
     sessionTitle: "Turning Your Idea Into a Revenue-Generating Business",
     transformationPromise: "A step-by-step framework to launch and scale a profitable enterprise.",
     bio: "Bio coming soon.",
+    photo: "/Gwen.jpeg",
   },
   {
     id: "featured-4",
@@ -89,6 +92,7 @@ export const speakers: Speaker[] = [
     sessionTitle: "Leading With Clarity: Communication, Resilience & Vision",
     transformationPromise: "Elevate your leadership presence and inspire teams to action.",
     bio: "Bio coming soon.",
+    photo: "/Lamont.png",
   },
   {
     id: "featured-5",
@@ -101,5 +105,6 @@ export const speakers: Speaker[] = [
     sessionTitle: "From Vision to Action: The Implementation Framework",
     transformationPromise: "Turn inspiration into a concrete, executable plan.",
     bio: "Bio coming soon.",
+    photo: "/Walker.jpeg",
   },
 ];
