@@ -38,26 +38,33 @@ function SpeakerCard({
   speaker: Speaker;
   onView: () => void;
 }) {
+  const badgeContent = speaker.isKeynote
+    ? (speaker.dayLabel ?? "Keynote Speaker")
+    : speaker.isFeaturedHost
+    ? "Featured Host"
+    : `Featured — ${speaker.duration}`;
+
+  const badgeClass = speaker.isKeynote
+    ? "bg-[#1a56db] text-white"
+    : speaker.isFeaturedHost
+    ? "bg-[#c79d35] text-white"
+    : "bg-gray-100 text-gray-600";
+
   return (
     <div
       className={`bg-white rounded-2xl border p-7 text-center flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ${
-        speaker.isKeynote ? "border-[#1a56db]/40 shadow-md" : "border-gray-200"
+        speaker.isKeynote
+          ? "border-[#1a56db]/40 shadow-md"
+          : speaker.isFeaturedHost
+          ? "border-[#c79d35]/40 shadow-md"
+          : "border-gray-200"
       }`}
     >
-      {speaker.isKeynote && (
-        <div className="flex justify-center mb-3">
-          <span className="bg-[#1a56db] text-white text-xs font-bold px-4 py-1 rounded-full tracking-wide uppercase">
-            {speaker.dayLabel ?? "Keynote Speaker"}
-          </span>
-        </div>
-      )}
-      {!speaker.isKeynote && (
-        <div className="flex justify-center mb-3">
-          <span className="bg-gray-100 text-gray-600 text-xs font-semibold px-4 py-1 rounded-full tracking-wide uppercase">
-            Featured — {speaker.duration}
-          </span>
-        </div>
-      )}
+      <div className="flex justify-center mb-3">
+        <span className={`text-xs font-bold px-4 py-1 rounded-full tracking-wide uppercase ${badgeClass}`}>
+          {badgeContent}
+        </span>
+      </div>
 
       <SpeakerAvatar name={speaker.name} photo={speaker.photo} isKeynote={speaker.isKeynote} />
 
@@ -94,7 +101,8 @@ function SpeakerCard({
 export default function SpeakerGrid() {
   const [selected, setSelected] = useState<Speaker | null>(null);
   const keynotes = speakers.filter((s) => s.isKeynote);
-  const featured = speakers.filter((s) => !s.isKeynote);
+  const host = speakers.filter((s) => s.isFeaturedHost);
+  const featured = speakers.filter((s) => !s.isKeynote && !s.isFeaturedHost);
 
   return (
     <section id="speakers" className="bg-gray-50 py-24 px-4 sm:px-6 lg:px-8">
@@ -126,11 +134,24 @@ export default function SpeakerGrid() {
           </div>
         </div>
 
+        {host.length > 0 && (
+          <div className="mb-8">
+            <p className="text-xs font-bold text-[#c79d35] uppercase tracking-widest text-center mb-6">
+              Featured Host
+            </p>
+            <div className="max-w-xs mx-auto">
+              {host.map((s) => (
+                <SpeakerCard key={s.id} speaker={s} onView={() => setSelected(s)} />
+              ))}
+            </div>
+          </div>
+        )}
+
         <div>
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest text-center mb-6">
             Featured Speakers
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {featured.map((s) => (
               <SpeakerCard key={s.id} speaker={s} onView={() => setSelected(s)} />
             ))}
