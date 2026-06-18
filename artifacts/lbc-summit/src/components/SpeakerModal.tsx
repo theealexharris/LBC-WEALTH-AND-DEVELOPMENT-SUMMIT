@@ -39,10 +39,16 @@ export default function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
       <DialogContent className="max-w-lg">
         <DialogHeader>
           <div className="flex items-center gap-5 mb-2">
-            <InitialsAvatar name={speaker.name} large />
+            {speaker.photo ? (
+              <div className="w-24 h-24 rounded-2xl overflow-hidden border border-[#1a56db]/20 shadow-md flex-shrink-0 bg-gray-50">
+                <img src={speaker.photo} alt={speaker.name} className="w-full h-full object-cover object-center" />
+              </div>
+            ) : (
+              <InitialsAvatar name={speaker.name} large />
+            )}
             <div>
-              <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full mb-2 ${speaker.isKeynote ? "bg-[#1a56db] text-white" : "bg-gray-100 text-[#0f1729]"}`}>
-                {speaker.isKeynote ? `Keynote — ${speaker.duration}` : `Featured — ${speaker.duration}`}
+              <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full mb-2 ${speaker.isKeynote ? "bg-[#1a56db] text-white" : speaker.isFeaturedHost ? "bg-[#c79d35] text-white" : "bg-gray-100 text-[#0f1729]"}`}>
+                {speaker.isKeynote ? (speaker.dayLabel ?? `Keynote — ${speaker.duration}`) : speaker.isFeaturedHost ? "Featured Host" : `Featured — ${speaker.duration}`}
               </span>
               <DialogTitle
                 className="text-xl font-extrabold text-[#0f1729]"
@@ -68,14 +74,16 @@ export default function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
             </p>
           </div>
 
-          <div>
-            <p className="text-[#1a56db] text-xs font-semibold uppercase tracking-widest mb-1">
-              What You'll Gain
-            </p>
-            <p className="text-gray-700 text-sm leading-relaxed">
-              {speaker.transformationPromise}
-            </p>
-          </div>
+          {speaker.transformationPromise && (
+            <div>
+              <p className="text-[#1a56db] text-xs font-semibold uppercase tracking-widest mb-1">
+                What You'll Gain
+              </p>
+              <p className="text-gray-700 text-sm leading-relaxed">
+                {speaker.transformationPromise}
+              </p>
+            </div>
+          )}
 
           <div>
             <p className="text-gray-400 text-xs font-semibold uppercase tracking-widest mb-1">
