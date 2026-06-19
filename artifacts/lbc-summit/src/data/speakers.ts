@@ -82,7 +82,7 @@ export const speakers: Speaker[] = [
     sessionTitle: "From Vision to Action: The Implementation Framework",
     transformationPromise: "Turn inspiration into a concrete, executable plan.",
     bio: "Quatrell Walker is a motivational speaker, author, accountability coach, and U.S. Army combat veteran who inspires others to lead with purpose, resilience, and authenticity. As the founder of Cut From a Different Cloth, he empowers youth, educators, veterans, and professionals through impactful keynote presentations and leadership development programs.\n\nQuatrell is the author of Cut From a Different Cloth and co-author of The Motivation Manifesto – Les Brown & Friends. His message is built on his signature principles of Practice, Patience, and Perseverance, encouraging others to embrace their uniqueness and become the best version of themselves.",
-    photo: "/Walker.jpeg",
+    photo: "/Walker and Les.png",
   },
   {
     id: "featured-3",
