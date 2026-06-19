@@ -64,7 +64,7 @@ export default function SponsorSection() {
   };
 
   return (
-    <section className="bg-gray-50 py-24 px-4 sm:px-6 lg:px-8">
+    <section id="sponsor" className="bg-gray-50 py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-[#1a56db] text-sm font-semibold tracking-widest uppercase mb-3">
