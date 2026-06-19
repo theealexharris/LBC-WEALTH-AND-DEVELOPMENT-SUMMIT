@@ -38,7 +38,7 @@ export const speakers: Speaker[] = [
     duration: "60 Minutes",
     dayLabel: "Day 2 Keynote Speaker",
     category: "Wealth Development, & Mindset Implementation",
-    sessionTitle: "From Survival To Strategy: Breaking The Survival Mindset",
+    sessionTitle: "From Serving Life To Living Life: Breaking the Survival Mindset",
     transformationPromise: "Discover practical strategies for wealth accumulation and asset building.",
     bio: "Bio coming soon.",
     photo: "/Flip and snoop.png",
