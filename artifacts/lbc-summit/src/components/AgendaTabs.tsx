@@ -112,7 +112,7 @@ export default function AgendaTabs() {
                 : "Day Two — Implementation & Development Training"}
             </p>
             <p className="text-white/70 text-xs mt-0.5">
-              {activeDay === 1 ? "General Session: 10:00am–4:00pm · VIP: 4:00–5:00pm" : "General Session: 9:00am–1:00pm · VIP: 1:15–2:15pm"}
+              {activeDay === 1 ? "General Session: 10:00am–4:00pm · VIP: 4:00–5:00pm" : "General Session: 1:00pm–5:00pm · VIP: 5:00–6:00pm"}
             </p>
           </div>
           <div className="px-6 divide-y divide-gray-100">
