@@ -19,7 +19,6 @@ const MODAL_CONTENT: Record<string, { title: string; body: string }> = {
   },
 };
 
-const LINK_ACTIONS: Record<string, () => void> = {};
 
 function scrollTo(id: string) {
   const el = document.getElementById(id);

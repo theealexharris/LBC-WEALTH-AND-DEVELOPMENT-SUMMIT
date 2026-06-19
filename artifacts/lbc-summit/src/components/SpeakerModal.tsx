@@ -48,7 +48,7 @@ export default function SpeakerModal({ speaker, onClose }: SpeakerModalProps) {
             )}
             <div>
               <span className={`inline-block text-xs font-bold px-3 py-1 rounded-full mb-2 ${speaker.isKeynote ? "bg-[#1a56db] text-white" : speaker.isFeaturedHost ? "bg-[#c79d35] text-white" : "bg-gray-100 text-[#0f1729]"}`}>
-                {speaker.isKeynote ? (speaker.dayLabel ?? `Keynote — ${speaker.duration}`) : speaker.isFeaturedHost ? "Featured Host" : `Featured — ${speaker.duration}`}
+                {speaker.isKeynote ? (speaker.dayLabel ?? `Keynote — ${speaker.duration}`) : speaker.isFeaturedHost ? "Featured Host" : speaker.duration ? `Featured — ${speaker.duration}` : "Featured Speaker"}
               </span>
               <DialogTitle
                 className="text-xl font-extrabold text-[#0f1729]"
