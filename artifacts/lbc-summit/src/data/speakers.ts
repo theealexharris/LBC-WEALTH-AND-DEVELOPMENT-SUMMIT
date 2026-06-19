@@ -53,7 +53,7 @@ export const speakers: Speaker[] = [
     duration: "40 Minutes",
     dayLabel: "Featured Host",
     category: "AI, Leadership & Innovation",
-    sessionTitle: "Aug. 15 – 16, 2026",
+    sessionTitle: "Creating Experiences That Connect Technology, People, and Purpose",
     transformationPromise: "",
     bio: "Dr. Vicki Wright Hamilton is a speaker, strategist, certified AI consultant, app builder, and founder of VWH Consulting, where she helps organizations lead people-first technology adoption, AI readiness, and culture-centered change. She is also the creator of PeacefulCare.ai, a caregiving technology app designed to help families stay informed, share responsibility, and manage care in one secure, connected place.\n\nHer work sits at the intersection of leadership, AI, innovation, and the future of work. Known for making complex technology feel practical, human, and actionable, Dr. Vicki equips leaders, teams, and communities to stay relevant, valuable, and distinctly human in the age of intelligent machines.\n\nAs a recognized leader, award-winning professional, and engaging host, Dr. Vicki brings warmth, credibility, strategic insight, and commanding executive presence to every stage. Whether leading a keynote, facilitating a conversation, or serving as MC, she creates experiences that connect technology, people, and purpose.",
     photo: "/Dr. Vicki Headshot.jpg",
