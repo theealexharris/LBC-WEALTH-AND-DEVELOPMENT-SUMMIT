@@ -16,7 +16,8 @@ export const agenda: DayAgenda[] = [
     day: 1,
     title: "Day 1",
     items: [
-      { id: "d1-1", time: "8:15–9:00am", title: "Registration, networking, music and sponsor engagement", type: "break" },
+      { id: "d1-1a", time: "9:00–9:30am", title: "Registration, networking, music and sponsor engagement — VIP Early Admission", type: "vip" },
+      { id: "d1-1b", time: "9:30–10:00am", title: "Registration, networking, music and sponsor engagement — General Admission", type: "break" },
       { id: "d1-2", time: "9:00–9:15am", title: "Summit opening and welcome", type: "break" },
       { id: "d1-3", time: "9:15–10:15am", title: "Keynote Speaker 1", type: "keynote" },
       { id: "d1-4", time: "10:15–10:30am", title: "Break and networking", type: "break" },
@@ -29,7 +30,7 @@ export const agenda: DayAgenda[] = [
       { id: "d1-11", time: "2:05–2:20pm", title: "Break", type: "break" },
       { id: "d1-12", time: "2:20–2:50pm", title: "Transformation workshop", type: "workshop" },
       { id: "d1-13", time: "2:50–3:00pm", title: "Day One closing", type: "break" },
-      { id: "d1-14", time: "3:15–4:15pm", title: "Private keynote debrief, Q&A, speaker networking", type: "vip" },
+      { id: "d1-14", time: "4:00–5:00pm", title: "Private keynote debrief, Q&A, speaker networking", type: "vip" },
     ],
   },
   {
