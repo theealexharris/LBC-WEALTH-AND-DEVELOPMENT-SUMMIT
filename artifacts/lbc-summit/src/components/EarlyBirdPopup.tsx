@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { X, Tag, Copy, Check } from "lucide-react";
 
-const PROMO_CODE = "Y5IiGdUD";
+const PROMO_CODE = "EARLYBIRD25";
 const EXPIRY = "July 1, 2026";
 const SESSION_KEY = "lbc_early_bird_dismissed";
 
