@@ -29,6 +29,7 @@ export const TICKET_LABELS: Record<string, string> = {
   vip: "VIP Admission",
   vip_plus_one: "VIP Admission + Guest",
   executive: "Executive Sponsor Pass",
+  young_adult: "Young Adult Admission",
 };
 
 export const TICKET_AMOUNTS: Record<string, number> = {
@@ -37,14 +38,16 @@ export const TICKET_AMOUNTS: Record<string, number> = {
   vip: 9700,
   vip_plus_one: 14500,
   executive: 25000,
+  young_adult: 1500,
 };
 
 export const PRICE_IDS: Record<string, string> = {
-  general: "price_1TikgcGWCvAl090EVzNs0rdA",
+  general: "price_1TjtkaGWCvAl090EkrUTvIPK",
   general_plus_one: "price_1TikmvGWCvAl090EC1kbHIk3",
   vip: "price_1TikpXGWCvAl090EAQwd14ft",
   vip_plus_one: "price_1Tiks1GWCvAl090Eqse5mKsf",
   executive: "price_1Tikx2GWCvAl090EvsbqvkIS",
+  young_adult: "price_1TjtlvGWCvAl090EhHhLycBc",
 };
 
 export interface AttendeeData {
