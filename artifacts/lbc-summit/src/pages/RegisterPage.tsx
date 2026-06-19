@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, Star, Users, Shield, Crown, Building2, ArrowLeft, Loader2 } from "lucide-react";
+import { CheckCircle2, Star, Users, Shield, Crown, Building2, ArrowLeft, Loader2, ShieldCheck, X } from "lucide-react";
 import summitLogo from "@assets/LBC_Summit_pic_1781402272251.png";
 
 const US_STATES = [
@@ -104,6 +104,24 @@ const tickets: Ticket[] = [
       "Free 2-Day B2B/B2C Marketing & Networking",
     ],
   },
+  {
+    id: "young_adult",
+    name: "Young Adult Admission",
+    price: "$15",
+    amount: 15,
+    badge: "Ages 17–20",
+    icon: ShieldCheck,
+    description:
+      "A discounted summit ticket for young adults ages 17–20. Full two-day access to all sessions, workshops, and networking. Staff approval password required to purchase.",
+    inclusions: [
+      "Ages 17–20 Only",
+      "2-Day Summit Access",
+      "All 7 Speaker Sessions",
+      "Workshops & Panels",
+      "General Networking Access",
+      "Digital Summit Workbook",
+    ],
+  },
 ];
 
 interface FormData {
@@ -129,8 +147,70 @@ function validate(data: FormData): FormErrors {
   return errors;
 }
 
+const YOUNG_ADULT_PASSWORD = "Summit Approved";
+
+function YoungAdultGate({ onClose, onConfirm }: { onClose: () => void; onConfirm: () => void }) {
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (password === YOUNG_ADULT_PASSWORD) {
+      onClose();
+      onConfirm();
+    } else {
+      setError("Incorrect password. Please check with event staff.");
+      setPassword("");
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4" onClick={onClose}>
+      <div className="bg-[#0f1729] border border-white/10 rounded-2xl p-8 max-w-md w-full relative shadow-2xl" onClick={(e) => e.stopPropagation()}>
+        <button onClick={onClose} className="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors" aria-label="Close">
+          <X size={20} />
+        </button>
+        <div className="flex items-center gap-3 mb-5">
+          <div className="w-10 h-10 rounded-full bg-[#1a56db]/20 flex items-center justify-center flex-shrink-0">
+            <ShieldCheck size={20} className="text-[#1a56db]" />
+          </div>
+          <div>
+            <h3 className="text-lg font-extrabold text-white" style={{ fontFamily: "var(--app-font-heading)" }}>
+              Age Verification Required
+            </h3>
+            <p className="text-gray-400 text-sm">Young Adult ticket — Ages 17–20 only</p>
+          </div>
+        </div>
+        <p className="text-gray-400 text-sm mb-5 leading-relaxed">
+          This discounted ticket is reserved for attendees ages 17–20. Please enter
+          the approval password provided by event staff to continue.
+        </p>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => { setPassword(e.target.value); setError(""); }}
+            placeholder="Enter approval password"
+            className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#1a56db]"
+            autoFocus
+          />
+          {error && <p className="text-red-400 text-sm">{error}</p>}
+          <button
+            type="submit"
+            className="w-full bg-[#1a56db] hover:bg-[#1e3a8a] text-white font-bold py-3.5 rounded-xl transition-colors"
+            style={{ fontFamily: "var(--app-font-heading)" }}
+          >
+            Verify & Continue to Purchase
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 export default function RegisterPage() {
   const [selectedTicket, setSelectedTicket] = useState<string | null>(null);
+  const [showYAGate, setShowYAGate] = useState(false);
   const [form, setForm] = useState<FormData>({
     firstName: "", lastName: "", email: "", phone: "",
     company: "", jobTitle: "", city: "", state: "",
@@ -177,6 +257,12 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-[#0a0f1e]">
+      {showYAGate && (
+        <YoungAdultGate
+          onClose={() => setShowYAGate(false)}
+          onConfirm={() => setSelectedTicket("young_adult")}
+        />
+      )}
       {/* Header */}
       <header className="bg-[#0f1729]/95 backdrop-blur-md border-b border-white/10 py-4 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
@@ -220,7 +306,7 @@ export default function RegisterPage() {
                 return (
                   <button
                     key={t.id}
-                    onClick={() => setSelectedTicket(t.id)}
+                    onClick={() => t.id === "young_adult" ? setShowYAGate(true) : setSelectedTicket(t.id)}
                     className={`relative rounded-2xl p-6 text-left flex flex-col transition-all hover:-translate-y-0.5 border-2 ${
                       t.featured
                         ? "bg-[#0f1729] border-[#c79d35] shadow-2xl shadow-yellow-900/20"
@@ -228,7 +314,7 @@ export default function RegisterPage() {
                     }`}
                   >
                     {t.badge && (
-                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#c79d35] text-[#0a0f1e] text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider whitespace-nowrap">
+                      <span className={`absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider whitespace-nowrap ${t.id === "young_adult" ? "bg-[#1a56db] text-white" : "bg-[#c79d35] text-[#0a0f1e]"}`}>
                         {t.badge}
                       </span>
                     )}
