@@ -16,6 +16,7 @@ import SponsorSection from "@/components/SponsorSection";
 import FAQSection from "@/components/FAQSection";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import EarlyBirdPopup from "@/components/EarlyBirdPopup";
 import RegisterPage from "@/pages/RegisterPage";
 import SuccessPage from "@/pages/SuccessPage";
 import AdminPage from "@/pages/AdminPage";
@@ -26,6 +27,7 @@ function LandingPage() {
 
   return (
     <>
+      <EarlyBirdPopup />
       <Header onOpenModal={openModal} />
       <main>
         <Hero onOpenModal={openModal} />
