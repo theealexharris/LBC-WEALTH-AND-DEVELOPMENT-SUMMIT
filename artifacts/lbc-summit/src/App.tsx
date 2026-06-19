@@ -22,7 +22,7 @@ import AdminPage from "@/pages/AdminPage";
 
 function LandingPage() {
   const [, navigate] = useLocation();
-  const openModal = (_type: "general" | "vip") => navigate("/register");
+  const openModal = (_type: "general" | "vip" | "young_adult") => navigate("/register");
 
   return (
     <>

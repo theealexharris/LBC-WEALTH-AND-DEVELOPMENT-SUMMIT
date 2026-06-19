@@ -1,13 +1,102 @@
-import { CheckCircle2, Star } from "lucide-react";
+import { useState } from "react";
+import { CheckCircle2, Star, X, ShieldCheck } from "lucide-react";
 import { tickets } from "@/data/tickets";
 
+const YOUNG_ADULT_PASSWORD = "Summit Approved";
+
 interface TicketSectionProps {
-  onOpenModal: (type: "general" | "vip") => void;
+  onOpenModal: (type: "general" | "vip" | "young_adult") => void;
+}
+
+function YoungAdultGate({ onClose, onOpenModal }: { onClose: () => void; onOpenModal: (type: "general" | "vip" | "young_adult") => void }) {
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (password === YOUNG_ADULT_PASSWORD) {
+      onClose();
+      onOpenModal("young_adult");
+    } else {
+      setError("Incorrect password. Please check with event staff.");
+      setPassword("");
+    }
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-2xl p-8 max-w-md w-full relative shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition-colors"
+          aria-label="Close"
+        >
+          <X size={20} />
+        </button>
+
+        <div className="flex items-center gap-3 mb-5">
+          <div className="w-10 h-10 rounded-full bg-[#1a56db]/10 flex items-center justify-center flex-shrink-0">
+            <ShieldCheck size={20} className="text-[#1a56db]" />
+          </div>
+          <div>
+            <h3
+              className="text-lg font-extrabold text-[#0f1729]"
+              style={{ fontFamily: "var(--app-font-heading)" }}
+            >
+              Age Verification Required
+            </h3>
+            <p className="text-gray-500 text-sm">Young Adult ticket — Ages 17–20 only</p>
+          </div>
+        </div>
+
+        <p className="text-gray-600 text-sm mb-5 leading-relaxed">
+          This discounted ticket is reserved for attendees ages 17–20. Please enter
+          the approval password provided by event staff to continue.
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => { setPassword(e.target.value); setError(""); }}
+            placeholder="Enter approval password"
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#1a56db]"
+            autoFocus
+          />
+          {error && (
+            <p className="text-red-500 text-sm">{error}</p>
+          )}
+          <button
+            type="submit"
+            className="w-full bg-[#1a56db] hover:bg-[#1e3a8a] text-white font-bold py-3.5 rounded-xl transition-colors"
+            style={{ fontFamily: "var(--app-font-heading)" }}
+          >
+            Verify & Continue to Purchase
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default function TicketSection({ onOpenModal }: TicketSectionProps) {
+  const [showGate, setShowGate] = useState(false);
+
   return (
     <section id="tickets" className="bg-white py-24 px-4 sm:px-6 lg:px-8">
+      {showGate && (
+        <YoungAdultGate
+          onClose={() => setShowGate(false)}
+          onOpenModal={onOpenModal}
+        />
+      )}
+
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-[#1a56db] text-sm font-semibold tracking-widest uppercase mb-3">
@@ -25,10 +114,11 @@ export default function TicketSection({ onOpenModal }: TicketSectionProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-start mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start mb-8">
           {tickets.map((ticket) => {
             const isVip = ticket.id === "vip";
             const isGroup = ticket.id === "group";
+            const isYoungAdult = ticket.id === "young_adult";
 
             return (
               <div
@@ -38,6 +128,8 @@ export default function TicketSection({ onOpenModal }: TicketSectionProps) {
                     ? "bg-[#0f1729] border-2 border-[#c79d35] shadow-2xl"
                     : isGroup
                     ? "bg-gray-50 border border-gray-200"
+                    : isYoungAdult
+                    ? "bg-blue-50 border-2 border-[#1a56db]/30 shadow-sm"
                     : "bg-white border-2 border-[#1a56db]/20 shadow-sm"
                 }`}
                 data-testid={`card-ticket-${ticket.id}`}
@@ -47,6 +139,13 @@ export default function TicketSection({ onOpenModal }: TicketSectionProps) {
                     <span className="bg-[#c79d35] text-[#0a0f1e] text-xs font-bold px-5 py-1.5 rounded-full flex items-center gap-1.5 uppercase tracking-wider">
                       <Star size={12} />
                       Most Complete
+                    </span>
+                  </div>
+                )}
+                {isYoungAdult && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="bg-[#1a56db] text-white text-xs font-bold px-5 py-1.5 rounded-full uppercase tracking-wider">
+                      Ages 17–20
                     </span>
                   </div>
                 )}
@@ -63,6 +162,9 @@ export default function TicketSection({ onOpenModal }: TicketSectionProps) {
                   </div>
                   {isGroup && (
                     <p className="text-xs text-gray-500 mt-1">Contact us for group pricing</p>
+                  )}
+                  {isYoungAdult && (
+                    <p className="text-xs text-gray-500 mt-1">Staff approval required at checkout</p>
                   )}
                 </div>
 
@@ -110,6 +212,16 @@ export default function TicketSection({ onOpenModal }: TicketSectionProps) {
                     Request Group Information
                   </a>
                 )}
+                {isYoungAdult && (
+                  <button
+                    onClick={() => setShowGate(true)}
+                    className="w-full bg-[#1a56db] hover:bg-[#1e3a8a] text-white font-bold py-3.5 rounded-xl transition-all"
+                    data-testid="button-ticket-young-adult"
+                    style={{ fontFamily: "var(--app-font-heading)" }}
+                  >
+                    Get Young Adult Ticket
+                  </button>
+                )}
               </div>
             );
           })}
@@ -117,7 +229,7 @@ export default function TicketSection({ onOpenModal }: TicketSectionProps) {
 
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 text-center max-w-2xl mx-auto">
           <p className="text-amber-800 text-sm leading-relaxed">
-            <strong>Young Adult Discount:</strong> Ages 17–20 pay $15 — must pay at event registration.
+            <strong>Young Adult Discount:</strong> Ages 17–20 pay $15 — approval password required.
             Contact us at{" "}
             <a href="mailto:Support@lbcwealthanddevelopmentsummit.com" className="underline font-semibold">
               Support@lbcwealthanddevelopmentsummit.com

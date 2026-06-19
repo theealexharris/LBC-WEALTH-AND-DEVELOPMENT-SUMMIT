@@ -38,5 +38,19 @@ export const tickets = [
       "Dedicated seating options",
     ],
     isVip: false,
-  }
+  },
+  {
+    id: "young_adult",
+    name: "Young Adult Admission",
+    price: "$15",
+    inclusions: [
+      "Ages 17–20 only",
+      "Access to all 2 days",
+      "All 7 speaker sessions",
+      "Workshops & panels",
+      "General networking access",
+      "Digital summit workbook",
+    ],
+    isVip: false,
+  },
 ];
