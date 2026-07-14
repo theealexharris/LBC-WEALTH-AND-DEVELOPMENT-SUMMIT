@@ -41,7 +41,26 @@ export default function SuccessPage() {
       .then((r) => r.json())
       .then((d: Partial<RegistrationData> & { error?: string }) => {
         if (d.error) throw new Error(d.error);
-        setData(d as RegistrationData);
+const purchaseData = d as RegistrationData;
+setData(purchaseData);
+
+(window as any).dataLayer = (window as any).dataLayer || [];
+(window as any).dataLayer.push({
+  event: "purchase",
+  ecommerce: {
+    transaction_id: sessionId,
+    value: purchaseData.amountPaid / 100,
+    currency: "USD",
+    items: [
+      {
+        item_id: purchaseData.ticketType,
+        item_name: purchaseData.ticketType,
+        price: purchaseData.amountPaid / 100,
+        quantity: 1,
+      },
+    ],
+  },
+});
       })
       .catch((err: Error) => setError(err.message))
       .finally(() => setLoading(false));
