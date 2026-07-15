@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Instagram, Facebook, Linkedin, Twitter, X } from "lucide-react";
 import summitLogo from "@assets/LBC_Summit_pic_1781402272251.png";
+import { summitConfig } from "../data/summitConfig";
 
 const SUPPORT_EMAIL = "Support@LBCwealthanddevelopmentsummit.com";
 
@@ -133,11 +134,13 @@ export default function Footer() {
                 { icon: Twitter, label: "Twitter/X" },
               ].map(({ icon: Icon, label }) => (
                 <a
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-white/5 hover:bg-[#1a56db] flex items-center justify-center transition-colors"
-                >
+  key={label}
+  href={summitConfig.socialLinks[label.toLowerCase() as keyof typeof summitConfig.socialLinks]}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={label}
+  className="w-9 h-9 rounded-lg bg-white/5 hover:bg-[#1a56db] flex items-center justify-center transition-colors"
+>
                   <Icon size={16} className="text-gray-400 hover:text-white" />
                 </a>
               ))}
