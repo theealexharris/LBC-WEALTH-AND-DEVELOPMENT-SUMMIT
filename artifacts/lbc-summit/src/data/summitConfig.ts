@@ -12,8 +12,8 @@ export const summitConfig = {
   stripeGeneralLink: "#",
   stripeVipLink: "#",
   socialLinks: {
-    instagram: "#",
-    facebook: "#",
+    instagram: "https://www.instagram.com/lbcwealthdevelopment",
+    facebook: "https://www.facebook.com/profile.php?id=61591930350437",
     linkedin: "#",
     twitter: "#",
   },
