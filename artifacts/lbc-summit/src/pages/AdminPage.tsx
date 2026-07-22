@@ -35,6 +35,7 @@ const TICKET_LABELS: Record<string, string> = {
   vip: "VIP $97",
   vip_plus_one: "VIP+1 $145",
   executive: "Executive $250",
+  young_adult: "Young Adult $15",
 };
 
 const STATUS_COLORS: Record<string, string> = {

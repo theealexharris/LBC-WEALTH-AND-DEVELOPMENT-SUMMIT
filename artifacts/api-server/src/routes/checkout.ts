@@ -186,6 +186,11 @@ router.get("/checkout/verify", async (req, res) => {
       [record.registration_id]
     );
     const attendee = fullRecord.rows[0];
+    if (!attendee) {
+      logger.error({ registrationId: record.registration_id }, "Attendee record not found after creation");
+      res.status(500).json({ error: "Registration could not be retrieved. Please contact support." });
+      return;
+    }
 
     res.json({
       success: true,
