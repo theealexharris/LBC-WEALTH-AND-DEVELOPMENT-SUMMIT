@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Search, LogOut, Download, CheckCircle2, Circle, Loader2, Shield } from "lucide-react";
 import summitLogo from "@assets/LBC_Summit_pic_1781402272251.png";
+import AdminAffiliates from "@/components/AdminAffiliates";
 
 interface Attendee {
   registration_id: string;
@@ -58,6 +59,7 @@ export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState<string | null>(null);
   const [loggingIn, setLoggingIn] = useState(false);
+  const [tab, setTab] = useState<"registrations" | "affiliates">("registrations");
 
   const fetchRegistrations = useCallback(async (token: string, search: string, page: number) => {
     setState((s) => ({ ...s, loading: true, error: null }));
@@ -230,6 +232,25 @@ export default function AdminPage() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        {/* Primary tabs */}
+        <div className="inline-flex bg-[#0f1729] border border-white/10 rounded-xl p-1 mb-8">
+          {(["registrations", "affiliates"] as const).map((t) => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={`px-5 py-2 rounded-lg text-sm font-semibold capitalize transition-colors ${
+                tab === t ? "bg-[#1a56db] text-white" : "text-gray-400 hover:text-white"
+              }`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+
+        {tab === "affiliates" ? (
+          <AdminAffiliates token={state.token} />
+        ) : (
+        <>
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           <StatCard label="Total Registrations" value={String(state.total)} />
@@ -352,6 +373,8 @@ export default function AdminPage() {
               </div>
             )}
           </div>
+        )}
+        </>
         )}
       </div>
     </div>
