@@ -159,13 +159,23 @@ export async function createCommissionForSale(
   const referralId = ref.rows[0]?.id ?? null;
 
   try {
-    await db.query(
+    // ON CONFLICT DO NOTHING makes this idempotent on duplicate Stripe webhooks.
+    // Only bump the affiliate's running totals when a NEW commission row is inserted
+    // (RETURNING yields no row on conflict), so repeated events don't double-count.
+    const inserted = await db.query(
       `INSERT INTO commissions
          (affiliate_id, referral_id, stripe_session_id, sale_amount_cents, commission_rate, commission_amount_cents)
        VALUES ($1, $2, $3, $4, $5, $6)
-       ON CONFLICT (stripe_session_id) DO NOTHING`,
+       ON CONFLICT (stripe_session_id) DO NOTHING
+       RETURNING id`,
       [affiliate.id, referralId, stripeSessionId, saleAmountCents, rate, commissionCents]
     );
+
+    if (inserted.rows.length === 0) {
+      logger.info({ code, stripeSessionId }, "Commission already recorded for session — skipping");
+      return;
+    }
+
     await db.query(
       `UPDATE affiliates
          SET total_sales = total_sales + 1,
