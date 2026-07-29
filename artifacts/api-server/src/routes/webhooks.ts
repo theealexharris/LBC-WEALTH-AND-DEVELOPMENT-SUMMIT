@@ -4,6 +4,7 @@ import { logger } from "../lib/logger";
 import { getPool } from "../lib/db";
 import { createAttendeeRecord, TICKET_LABELS, TICKET_AMOUNTS } from "../lib/registration";
 import { sendConfirmationSMS } from "../lib/sms";
+import { createCommissionForSale } from "../lib/affiliates";
 
 const router = Router();
 
@@ -85,6 +86,11 @@ router.post("/webhooks/stripe", async (req: Request, res: Response) => {
         ).catch((err: unknown) => {
           logger.warn({ err }, "Failed to send confirmation SMS via webhook");
         });
+      }
+
+      // Affiliate commission — idempotent on stripe session id.
+      if (meta["ref"]) {
+        await createCommissionForSale(db, meta["ref"], session.id, amountPaid);
       }
 
       logger.info({ registrationId: record.registration_id }, "Webhook: attendee created");

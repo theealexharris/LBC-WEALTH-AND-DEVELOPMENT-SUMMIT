@@ -1,5 +1,15 @@
 import app from "./app";
 import { logger } from "./lib/logger";
+import { getPool } from "./lib/db";
+import { ensureAffiliateSchema } from "./lib/affiliates";
+
+// Bootstrap affiliate tables (idempotent). Non-fatal if DB is unavailable.
+const pool = getPool();
+if (pool) {
+  ensureAffiliateSchema(pool).catch((err) =>
+    logger.error({ err }, "Failed to ensure affiliate schema")
+  );
+}
 
 const rawPort = process.env["PORT"] ?? "10000";
 const port = Number(rawPort);

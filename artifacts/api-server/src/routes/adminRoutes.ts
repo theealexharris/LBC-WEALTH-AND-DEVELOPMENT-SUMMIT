@@ -269,4 +269,138 @@ router.get("/admin/attendees/:registrationId/qr", requireAdmin, async (req, res)
   }
 });
 
+// ── Affiliate management ──────────────────────────────────────────────────────
+const AFFILIATE_ID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+router.get("/admin/affiliates", requireAdmin, async (req, res) => {
+  const db = getPool();
+  if (!db) {
+    res.status(503).json({ error: "Database not configured" });
+    return;
+  }
+  const status = String(req.query["status"] ?? "").trim();
+  try {
+    const params: string[] = [];
+    let where = "";
+    if (status && ["pending", "active", "suspended"].includes(status)) {
+      where = "WHERE status = $1";
+      params.push(status);
+    }
+    const result = await db.query(
+      `SELECT id, first_name, last_name, email, phone, affiliate_code, commission_rate,
+              status, total_clicks, total_sales, total_commissions_cents, total_paid_cents, created_at
+       FROM affiliates ${where}
+       ORDER BY created_at DESC LIMIT 500`,
+      params
+    );
+    res.json({ affiliates: result.rows });
+  } catch (err) {
+    logger.error({ err }, "Admin: fetch affiliates failed");
+    res.status(500).json({ error: "Failed to fetch affiliates" });
+  }
+});
+
+router.patch("/admin/affiliates/:id/status", requireAdmin, async (req, res) => {
+  const id = String(req.params["id"] ?? "");
+  const status = String(req.body?.status ?? "");
+  if (!AFFILIATE_ID_RE.test(id)) {
+    res.status(400).json({ error: "Invalid affiliate ID" });
+    return;
+  }
+  if (!["active", "suspended", "pending"].includes(status)) {
+    res.status(400).json({ error: "Invalid status" });
+    return;
+  }
+  const db = getPool();
+  if (!db) {
+    res.status(503).json({ error: "Database not configured" });
+    return;
+  }
+  try {
+    const result = await db.query(
+      "UPDATE affiliates SET status = $1 WHERE id = $2 RETURNING affiliate_code, status",
+      [status, id]
+    );
+    if (result.rows.length === 0) {
+      res.status(404).json({ error: "Affiliate not found" });
+      return;
+    }
+    res.json({ affiliateCode: result.rows[0].affiliate_code, status: result.rows[0].status });
+  } catch (err) {
+    logger.error({ err }, "Admin: update affiliate status failed");
+    res.status(500).json({ error: "Failed to update affiliate" });
+  }
+});
+
+router.get("/admin/commissions", requireAdmin, async (req, res) => {
+  const db = getPool();
+  if (!db) {
+    res.status(503).json({ error: "Database not configured" });
+    return;
+  }
+  const status = String(req.query["status"] ?? "").trim();
+  try {
+    const params: string[] = [];
+    let where = "";
+    if (status && ["pending", "approved", "paid", "rejected"].includes(status)) {
+      where = "WHERE c.status = $1";
+      params.push(status);
+    }
+    const result = await db.query(
+      `SELECT c.id, c.sale_amount_cents, c.commission_amount_cents, c.status, c.created_at,
+              a.affiliate_code, a.first_name, a.last_name, a.payout_email
+       FROM commissions c JOIN affiliates a ON a.id = c.affiliate_id
+       ${where}
+       ORDER BY c.created_at DESC LIMIT 500`,
+      params
+    );
+    res.json({ commissions: result.rows });
+  } catch (err) {
+    logger.error({ err }, "Admin: fetch commissions failed");
+    res.status(500).json({ error: "Failed to fetch commissions" });
+  }
+});
+
+router.patch("/admin/commissions/:id/status", requireAdmin, async (req, res) => {
+  const id = String(req.params["id"] ?? "");
+  const status = String(req.body?.status ?? "");
+  if (!AFFILIATE_ID_RE.test(id)) {
+    res.status(400).json({ error: "Invalid commission ID" });
+    return;
+  }
+  if (!["approved", "rejected", "paid"].includes(status)) {
+    res.status(400).json({ error: "Invalid status" });
+    return;
+  }
+  const db = getPool();
+  if (!db) {
+    res.status(503).json({ error: "Database not configured" });
+    return;
+  }
+  try {
+    const tsCol = status === "approved" ? "approved_at" : status === "paid" ? "paid_at" : "created_at";
+    const result = await db.query(
+      `UPDATE commissions SET status = $1, ${tsCol} = NOW() WHERE id = $2
+       RETURNING affiliate_id, commission_amount_cents, status`,
+      [status, id]
+    );
+    const row = result.rows[0];
+    if (!row) {
+      res.status(404).json({ error: "Commission not found" });
+      return;
+    }
+    // When marked paid, roll the amount into the affiliate's total_paid.
+    if (status === "paid") {
+      await db.query(
+        "UPDATE affiliates SET total_paid_cents = total_paid_cents + $1 WHERE id = $2",
+        [row.commission_amount_cents, row.affiliate_id]
+      );
+    }
+    res.json({ status: row.status });
+  } catch (err) {
+    logger.error({ err }, "Admin: update commission status failed");
+    res.status(500).json({ error: "Failed to update commission" });
+  }
+});
+
 export default router;

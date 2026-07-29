@@ -78,6 +78,13 @@ export default function Header({ onOpenModal }: HeaderProps) {
               <Mail size={14} />
               Contact Support
             </a>
+            <a
+              href="/affiliate"
+              className="text-[#c79d35] hover:text-white text-sm font-semibold transition-colors"
+              data-testid="nav-affiliate-signup"
+            >
+              Affiliate Sign-up
+            </a>
             <button
               onClick={() => onOpenModal("general")}
               className="bg-[#1a56db] hover:bg-[#1e3a8a] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors shadow-lg"
@@ -120,6 +127,14 @@ export default function Header({ onOpenModal }: HeaderProps) {
             >
               <Mail size={16} />
               Contact Support
+            </a>
+            <a
+              href="/affiliate"
+              className="w-full border border-[#c79d35]/40 text-[#c79d35] font-semibold py-3 rounded-lg text-center transition-colors hover:bg-[#c79d35]/10"
+              onClick={() => setMobileOpen(false)}
+              data-testid="nav-affiliate-signup-mobile"
+            >
+              Affiliate Sign-up
             </a>
             <button
               onClick={() => { onOpenModal("general"); setMobileOpen(false); }}

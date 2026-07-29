@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CheckCircle2, Star, Users, Shield, Crown, Building2, ArrowLeft, Loader2, ShieldCheck, X } from "lucide-react";
 import summitLogo from "@assets/LBC_Summit_pic_1781402272251.png";
+import { getReferralCode } from "@/lib/referral";
 
 const US_STATES = [
   "AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA",
@@ -241,7 +242,7 @@ export default function RegisterPage() {
       const res = await fetch("/api/checkout/session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ticketType: selectedTicket, ...form }),
+        body: JSON.stringify({ ticketType: selectedTicket, ...form, ref: getReferralCode() ?? "" }),
       });
       const data = await res.json() as { url?: string; error?: string };
       if (!res.ok) throw new Error(data.error ?? "Checkout failed. Please try again.");

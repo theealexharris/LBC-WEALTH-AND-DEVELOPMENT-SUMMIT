@@ -9,6 +9,7 @@ import {
   createAttendeeRecord,
 } from "../lib/registration";
 import { sendConfirmationSMS } from "../lib/sms";
+import { createCommissionForSale } from "../lib/affiliates";
 import { EMAIL_RE, PHONE_RE, STRIPE_SESSION_RE } from "../lib/validators";
 
 const router = Router();
@@ -33,7 +34,7 @@ router.post("/checkout/session", async (req, res) => {
     ticketType, firstName, lastName, email, phone,
     company, jobTitle, city, state,
     accessibilityNeeds, emergencyContactName, emergencyContactPhone,
-    agreeTerms, agreeUpdates, agreeSms,
+    agreeTerms, agreeUpdates, agreeSms, ref,
   } = req.body;
 
   // Required field presence
@@ -104,6 +105,7 @@ router.post("/checkout/session", async (req, res) => {
         agreeTerms: agreeTerms ? "true" : "false",
         agreeUpdates: agreeUpdates ? "true" : "false",
         agreeSms: agreeSms ? "true" : "false",
+        ref: cap(ref, 40).toUpperCase(),
       },
       payment_method_types: ["card"],
       billing_address_collection: "auto",
@@ -167,6 +169,13 @@ router.get("/checkout/verify", async (req, res) => {
       agreeUpdates: meta["agreeUpdates"] === "true",
       agreeSms: meta["agreeSms"] === "true",
     });
+
+    // Affiliate commission — fire-and-forget; idempotent on stripe session id.
+    if (meta["ref"]) {
+      createCommissionForSale(db, meta["ref"], sessionId, amountPaid).catch((err: unknown) =>
+        logger.error({ err }, "Failed to create affiliate commission (verify)")
+      );
+    }
 
     if (meta["agreeSms"] === "true" && meta["phone"]) {
       sendConfirmationSMS(

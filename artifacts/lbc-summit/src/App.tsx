@@ -19,6 +19,7 @@ import Footer from "@/components/Footer";
 import RegisterPage from "@/pages/RegisterPage";
 import SuccessPage from "@/pages/SuccessPage";
 import AdminPage from "@/pages/AdminPage";
+import AffiliatePage from "@/pages/AffiliatePage";
 
 function LandingPage() {
   const [, navigate] = useLocation();
@@ -55,6 +56,7 @@ export default function App() {
       <Route path="/register/success" component={SuccessPage} />
       <Route path="/register" component={RegisterPage} />
       <Route path="/admin" component={AdminPage} />
+      <Route path="/affiliate" component={AffiliatePage} />
       <Route component={LandingPage} />
     </Switch>
   );
