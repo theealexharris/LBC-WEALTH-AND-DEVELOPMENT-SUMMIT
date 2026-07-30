@@ -48,7 +48,7 @@ export default function Hero({ onOpenModal }: HeroProps) {
           <div className="flex items-center gap-2 flex-wrap justify-center">
             <span className="w-2.5 h-2.5 rounded-full bg-[#c79d35] animate-pulse flex-shrink-0" />
             <span className="text-white text-base sm:text-lg md:text-xl font-semibold tracking-wide text-center" style={{ fontFamily: "var(--app-font-heading)" }}>
-              Two-Day Transformational Summit &nbsp;·&nbsp; Long Beach, CA.
+              Two-Day Transformational Wealth and Self-Development Summit &nbsp;·&nbsp; Long Beach, CA.
             </span>
           </div>
 
