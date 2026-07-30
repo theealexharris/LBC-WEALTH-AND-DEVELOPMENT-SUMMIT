@@ -1,16 +1,9 @@
-import { Calendar, MapPin, Users, Clock, Star, Shield } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
 import summitLogo from "@assets/LBC_Summit_pic_1781402272251.png";
 
 interface HeroProps {
   onOpenModal: (type: "general" | "vip") => void;
 }
-
-const stats = [
-  { icon: Users, value: "7", label: "Expert Speakers" },
-  { icon: Clock, value: "10", label: "Programming Hours" },
-  { icon: Star, value: "2", label: "Keynotes" },
-  { icon: Shield, value: "2", label: "VIP Experiences" },
-];
 
 export default function Hero({ onOpenModal }: HeroProps) {
   return (
@@ -128,19 +121,6 @@ export default function Hero({ onOpenModal }: HeroProps) {
           >
             Explore the VIP Experience
           </button>
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl mx-auto mb-8">
-          {stats.map(({ icon: Icon, value, label }) => (
-            <div key={label} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl py-3 px-2">
-              <Icon className="mx-auto mb-1 text-[#c79d35]" size={18} />
-              <p className="text-xl font-extrabold text-white" style={{ fontFamily: "var(--app-font-heading)" }}>
-                {value}
-              </p>
-              <p className="text-xs text-gray-400">{label}</p>
-            </div>
-          ))}
         </div>
 
         {/* Date + Location footer */}
