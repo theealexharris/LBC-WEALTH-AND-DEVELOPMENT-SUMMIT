@@ -9,6 +9,7 @@ import {
   generateUniqueAffiliateCode,
   recordClick,
 } from "../lib/affiliates";
+import { sendAffiliateApplicationEmail } from "../lib/email";
 
 const router = Router();
 const MAX_LEN = 200;
@@ -103,6 +104,16 @@ router.post("/affiliate/register", async (req, res) => {
     );
 
     logger.info({ code }, "New affiliate registered (pending approval)");
+
+    // Notify admin of the new application (fire-and-forget).
+    sendAffiliateApplicationEmail({
+      firstName: String(firstName),
+      lastName: String(lastName),
+      email: String(email).toLowerCase(),
+      phone: phone ? String(phone) : null,
+      affiliateCode: code,
+    }).catch((err) => logger.error({ err }, "Failed to send affiliate application email"));
+
     res.status(201).json({
       success: true,
       affiliateCode: code,

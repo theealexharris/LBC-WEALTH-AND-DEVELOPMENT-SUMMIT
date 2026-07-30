@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { logger } from "../lib/logger";
 import { getPool } from "../lib/db";
 import { REGISTRATION_ID_RE } from "../lib/validators";
+import { sendAffiliateApprovalEmail } from "../lib/email";
 
 const router = Router();
 
@@ -317,15 +318,34 @@ router.patch("/admin/affiliates/:id/status", requireAdmin, async (req, res) => {
     return;
   }
   try {
+    // Capture the previous status so we only email on a real pending → active flip.
     const result = await db.query(
-      "UPDATE affiliates SET status = $1 WHERE id = $2 RETURNING affiliate_code, status",
+      `UPDATE affiliates a SET status = $1
+       FROM (SELECT status AS old_status FROM affiliates WHERE id = $2) prev
+       WHERE a.id = $2
+       RETURNING a.affiliate_code, a.status, a.first_name, a.email, prev.old_status`,
       [status, id]
     );
     if (result.rows.length === 0) {
       res.status(404).json({ error: "Affiliate not found" });
       return;
     }
-    res.json({ affiliateCode: result.rows[0].affiliate_code, status: result.rows[0].status });
+    const row = result.rows[0];
+
+    // Send the "you're approved" email when an affiliate becomes active.
+    if (status === "active" && row.old_status !== "active") {
+      const base = process.env["SITE_URL"]
+        ?? process.env["FRONTEND_URL"]
+        ?? "https://lbcwealthanddevelopmentsummit.com";
+      sendAffiliateApprovalEmail({
+        firstName: row.first_name as string,
+        email: row.email as string,
+        affiliateCode: row.affiliate_code as string,
+        referralLink: `${base.replace(/\/$/, "")}/register?ref=${row.affiliate_code}`,
+      }).catch((err) => logger.error({ err }, "Failed to send affiliate approval email"));
+    }
+
+    res.json({ affiliateCode: row.affiliate_code, status: row.status });
   } catch (err) {
     logger.error({ err }, "Admin: update affiliate status failed");
     res.status(500).json({ error: "Failed to update affiliate" });
