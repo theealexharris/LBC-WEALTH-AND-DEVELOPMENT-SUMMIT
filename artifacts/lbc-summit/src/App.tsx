@@ -30,11 +30,11 @@ function LandingPage() {
       <Header onOpenModal={openModal} />
       <main>
         <Hero onOpenModal={openModal} />
+        <SpeakerGrid />
         <CredibilityStrip />
         <TransformationSection onOpenModal={openModal} />
         <SummitPillars />
         <AudienceSection onOpenModal={openModal} />
-        <SpeakerGrid />
         <ExperienceSection onOpenModal={openModal} />
         <AgendaTabs />
         <VIPSection onOpenModal={openModal} />
