@@ -105,7 +105,7 @@ export default function SpeakerGrid() {
   const featured = speakers.filter((s) => !s.isKeynote && !s.isFeaturedHost);
 
   return (
-    <section id="speakers" className="bg-gray-50 py-24 px-4 sm:px-6 lg:px-8">
+    <section id="speakers" className="bg-gray-50 pt-12 pb-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-[#1a56db] text-sm font-semibold tracking-widest uppercase mb-3">
