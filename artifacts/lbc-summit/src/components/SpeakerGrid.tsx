@@ -108,8 +108,8 @@ export default function SpeakerGrid() {
     <section id="speakers" className="bg-gray-50 pt-12 pb-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-[#1a56db] text-sm font-semibold tracking-widest uppercase mb-3">
-            The Lineup
+          <p className="text-[#1a56db] text-2xl sm:text-3xl font-extrabold tracking-wide uppercase mb-3" style={{ fontFamily: "var(--app-font-heading)" }}>
+            The Summit Speaker Line Up
           </p>
           <h2
             className="text-4xl sm:text-5xl font-extrabold text-[#0f1729] mb-4"
