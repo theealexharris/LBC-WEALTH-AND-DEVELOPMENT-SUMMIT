@@ -127,23 +127,25 @@ export default function Footer() {
               purposeful action.
             </p>
             <div className="flex items-center gap-3">
-              {[
-                { icon: Instagram, label: "Instagram" },
-                { icon: Facebook, label: "Facebook" },
-                { icon: Linkedin, label: "LinkedIn" },
-                { icon: Twitter, label: "Twitter/X" },
-              ].map(({ icon: Icon, label }) => (
-                <a
-  key={label}
-  href={summitConfig.socialLinks[label.toLowerCase() as keyof typeof summitConfig.socialLinks]}
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label={label}
-  className="w-9 h-9 rounded-lg bg-white/5 hover:bg-[#1a56db] flex items-center justify-center transition-colors"
->
-                  <Icon size={16} className="text-gray-400 hover:text-white" />
-                </a>
-              ))}
+              {([
+                { icon: Instagram, label: "Instagram", url: summitConfig.socialLinks.instagram },
+                { icon: Facebook, label: "Facebook", url: summitConfig.socialLinks.facebook },
+                { icon: Linkedin, label: "LinkedIn", url: summitConfig.socialLinks.linkedin },
+                { icon: Twitter, label: "Twitter/X", url: summitConfig.socialLinks.twitter },
+              ] as const)
+                .filter(({ url }) => url && url !== "#")
+                .map(({ icon: Icon, label, url }) => (
+                  <a
+                    key={label}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="w-9 h-9 rounded-lg bg-white/5 hover:bg-[#1a56db] flex items-center justify-center transition-colors"
+                  >
+                    <Icon size={16} className="text-gray-400 hover:text-white" />
+                  </a>
+                ))}
             </div>
           </div>
 

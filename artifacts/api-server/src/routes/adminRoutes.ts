@@ -24,7 +24,13 @@ function requireAdmin(req: Request, res: Response, next: NextFunction): void {
     return;
   }
   try {
-    jwt.verify(token, getJwtSecret());
+    const payload = jwt.verify(token, getJwtSecret()) as { role?: string };
+    // Affiliate tokens are signed with the same JWT_SECRET — require the admin role
+    // explicitly so a non-admin token can never reach admin endpoints.
+    if (payload.role !== "admin") {
+      res.status(403).json({ error: "Forbidden" });
+      return;
+    }
     next();
   } catch {
     res.status(401).json({ error: "Invalid or expired token" });
@@ -398,10 +404,16 @@ router.patch("/admin/commissions/:id/status", requireAdmin, async (req, res) => 
     return;
   }
   try {
-    const tsCol = status === "approved" ? "approved_at" : status === "paid" ? "paid_at" : "created_at";
+    // Only stamp a timestamp for approved/paid; rejected must NOT overwrite created_at.
+    const setTs = status === "approved" ? ", approved_at = NOW()"
+      : status === "paid" ? ", paid_at = NOW()"
+      : "";
+    // Capture the previous status so the paid roll-up is idempotent.
     const result = await db.query(
-      `UPDATE commissions SET status = $1, ${tsCol} = NOW() WHERE id = $2
-       RETURNING affiliate_id, commission_amount_cents, status`,
+      `UPDATE commissions c SET status = $1${setTs}
+       FROM (SELECT status AS old_status FROM commissions WHERE id = $2) prev
+       WHERE c.id = $2
+       RETURNING c.affiliate_id, c.commission_amount_cents, c.status, prev.old_status`,
       [status, id]
     );
     const row = result.rows[0];
@@ -409,8 +421,8 @@ router.patch("/admin/commissions/:id/status", requireAdmin, async (req, res) => 
       res.status(404).json({ error: "Commission not found" });
       return;
     }
-    // When marked paid, roll the amount into the affiliate's total_paid.
-    if (status === "paid") {
+    // Roll into total_paid only on a real transition INTO paid (never double-count).
+    if (status === "paid" && row.old_status !== "paid") {
       await db.query(
         "UPDATE affiliates SET total_paid_cents = total_paid_cents + $1 WHERE id = $2",
         [row.commission_amount_cents, row.affiliate_id]
