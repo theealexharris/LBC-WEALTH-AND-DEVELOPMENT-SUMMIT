@@ -74,7 +74,7 @@ export const speakers: Speaker[] = [
   {
     id: "featured-2",
     name: "Quatrell Walker",
-    title: "Speaker 2 – Day 1",
+    title: "Speaker 3 – Day 2",
     company: "Cut From a Different Cloth",
     isKeynote: false,
     duration: "40 Minutes",
@@ -87,7 +87,7 @@ export const speakers: Speaker[] = [
   {
     id: "featured-3",
     name: "Lamonte Lee",
-    title: "Speaker 3 – Day 2",
+    title: "Speaker 2 – Day 1",
     company: "Farmers & Merchants Bank | TreImage",
     isKeynote: false,
     duration: "40 Minutes",
